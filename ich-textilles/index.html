@@ -173,6 +173,104 @@ footer{padding:60px 0 44px;border-top:1px solid var(--line)}
 @media (max-width:620px){.spec{grid-template-columns:1fr 1fr!important;gap:10px}.spec div{padding:12px 14px}.spec b{font-size:19px}}
 @media (max-width:520px){.g2:has(> .kpi){grid-template-columns:1fr 1fr;gap:12px}.card.kpi{padding:16px}.kpi b{font-size:34px;margin:10px 0 4px}.kpi .chipico{width:40px;height:40px;border-radius:12px}.kpi strong{font-size:14px;line-height:1.3;display:block}}
 .hero h1{font-size:clamp(44px,5.6vw,80px)}
+
+[hidden]{display:none!important}
+.progressbar{position:fixed;top:0;left:0;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--accent),var(--accent-2));z-index:60;pointer-events:none}
+.card{position:relative}
+.card::before,.coll::before,.piece::before,.proj::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(300px circle at var(--sx,50%) var(--sy,50%),color-mix(in srgb,var(--accent) 18%,transparent),transparent 65%);opacity:0;transition:opacity .35s;pointer-events:none;z-index:3}
+.card:hover::before,.coll:hover::before,.piece:hover::before,.proj:hover::before{opacity:1}
+@media (hover:none){.card::before,.coll::before,.piece::before,.proj::before{display:none}}
+.js h2.splitw .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em;margin-bottom:-.12em}
+.js h2.splitw .w>span{display:inline-block;transform:translateY(110%);transition:transform .9s var(--ease)}
+.js h2.splitw.in .w>span{transform:none}
+.flash{animation:flash 1.3s var(--ease)}
+@keyframes flash{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 70%,transparent)}100%{box-shadow:0 0 0 20px transparent}}
+.coll[role=button],.piece[role=button],.proj[role=button]{cursor:pointer}
+.coll-cta{position:absolute!important;top:14px;right:14px;z-index:4!important;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:color-mix(in srgb,var(--bg) 72%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);font:700 11px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);opacity:0;transform:translateY(-6px);transition:opacity .3s,transform .3s var(--ease)}
+.coll:hover .coll-cta,.coll:focus-visible .coll-cta,.piece:hover .coll-cta,.piece:focus-visible .coll-cta,.proj:hover .coll-cta,.proj:focus-visible .coll-cta{opacity:1;transform:none}
+@media (hover:none){.coll-cta{opacity:1;transform:none}}
+/* interactive process */
+.step{background:none;border:0;padding:12px;margin:-12px;text-align:left;color:inherit;font:inherit;cursor:pointer;border-radius:16px;transition:background .3s}
+.step:hover{background:color-mix(in srgb,var(--accent) 6%,transparent)}
+.step.cur{background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.step.cur h3{color:var(--accent-2)}
+.step:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.node{transition:all .4s var(--ease)}
+.step:hover .node{transform:scale(1.06)}
+.step.cur .node{box-shadow:0 0 0 7px var(--accent-soft)}
+.step-detail{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;margin-top:40px;padding:26px 30px}
+.step-detail.swap .sd-body{animation:sdIn .5s var(--ease)}
+@keyframes sdIn{from{opacity:0;transform:translateY(10px)}}
+.sd-ring{position:relative;width:88px;height:88px}
+.sd-ring>svg{width:88px;height:88px;transform:rotate(-90deg)}
+.sd-bg{fill:none;stroke:var(--line);stroke-width:5}
+.sd-fg{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;transition:stroke-dashoffset 1s var(--ease)}
+.sd-ring>span{position:absolute;inset:0;display:grid;place-items:center}
+.sd-body h3{font-size:23px;margin:8px 0 6px}
+.sd-body p{margin:0;color:var(--ink-2);max-width:64ch}
+/* compare (2D layer mask) */
+.compare{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-1);cursor:ew-resize;touch-action:pan-y;user-select:none;-webkit-user-select:none;--p:50%;background:var(--surface)}
+.cmp-a,.cmp-b{position:absolute;inset:0}
+.cmp-a svg,.cmp-b svg{width:100%;height:100%;display:block}
+.cmp-b{clip-path:inset(0 0 0 var(--p))}
+.cmp-line{position:absolute;top:0;bottom:0;left:var(--p);width:2px;margin-left:-1px;background:var(--accent-2);box-shadow:0 0 22px var(--accent);pointer-events:none}
+.cmp-knob{position:absolute;top:50%;left:50%;width:50px;height:50px;margin:-25px 0 0 -25px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;box-shadow:0 10px 28px -6px rgba(0,0,0,.7)}
+.cmp-knob .ico{color:var(--accent-ink)}
+.compare:focus-within .cmp-knob{outline:2px solid var(--ink);outline-offset:3px}
+.cmp-range{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;pointer-events:none}
+.cmp-tag{position:absolute;top:14px;padding:6px 11px;border-radius:999px;font:700 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;background:color-mix(in srgb,var(--bg) 62%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);color:var(--ink);pointer-events:none}
+.cmp-tag.l{left:14px}.cmp-tag.r{right:14px}
+.cmp-go{display:flex;gap:8px;flex-wrap:wrap;margin-top:26px}
+.gochip{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink-2);font:600 14px var(--sans);cursor:pointer;transition:all .25s var(--ease)}
+.gochip:hover{border-color:var(--accent);color:var(--ink)}
+.gochip[aria-pressed=true]{background:var(--accent-soft);border-color:var(--accent);color:var(--ink)}
+.cmp-hint{margin-top:16px;font-size:14px;display:flex;gap:8px;align-items:center}
+/* scroll-driven story */
+.scrub{padding:0}
+.scrub-track{position:relative;height:320vh}
+.scrub-sticky{position:sticky;top:72px;height:calc(100vh - 72px);display:flex;align-items:center;overflow:hidden}
+.scrub-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center;width:100%}
+.scrub-copy h2{margin-bottom:6px}
+.scrub-steps{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:4px}
+.scrub-steps li{padding:12px 16px;border-left:2px solid var(--line);color:var(--muted);font-size:15px;transition:all .45s var(--ease)}
+.scrub-steps li b{display:block;font:700 16.5px var(--sans);color:var(--ink-2);margin-bottom:2px}
+.scrub-steps li.on{border-color:var(--accent);color:var(--ink-2);background:linear-gradient(90deg,var(--accent-soft),transparent)}
+.scrub-steps li.on b{color:var(--ink)}
+.scrub-meter{height:3px;background:var(--line);border-radius:3px;margin-top:22px;overflow:hidden}
+.scrub-meter u{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+.scrub-hint{font-size:13px;margin-top:12px;letter-spacing:.06em;text-transform:uppercase}
+.scrub-visual{position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-1),0 40px 90px -40px color-mix(in srgb,var(--accent) 40%,transparent);background:var(--surface)}
+.scrub-visual svg{display:block;width:100%;height:auto;max-height:calc(100vh - 170px)}
+.scrub-visual .cap{position:absolute;left:14px;bottom:14px;display:inline-flex;align-items:center;gap:9px;padding:8px 13px;border-radius:999px;background:color-mix(in srgb,var(--bg) 62%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);font:700 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.scrub-visual .cap i{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none;animation:pulse 2s infinite}
+/* testimonial carousel */
+.q-stage{display:grid}
+.q-slide{grid-area:1/1;margin:0;opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease),transform .7s var(--ease);pointer-events:none}
+.q-slide.is-on{opacity:1;transform:none;pointer-events:auto}
+.q-ctrl{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:32px}
+.q-btn{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:all .25s var(--ease)}
+.q-btn:hover{border-color:var(--accent);transform:translateY(-2px)}
+.q-dots{display:flex;gap:8px}
+.q-dot{width:10px;height:10px;padding:0;border-radius:99px;border:0;background:var(--line);cursor:pointer;transition:all .45s var(--ease)}
+.q-dot[aria-current=true]{width:30px;background:var(--accent)}
+@media (max-width:980px){
+ .scrub-grid{grid-template-columns:1fr;gap:16px}.scrub-visual{order:-1}.scrub-visual svg{max-height:42vh;margin:0 auto}
+ .scrub-steps{margin-top:10px}.scrub-steps li{display:none}.scrub-steps li.on{display:block}.scrub-copy h2{font-size:28px;margin:6px 0 0}.scrub-hint{display:none}
+}
+@media (max-width:620px){.step-detail{grid-template-columns:1fr;gap:14px;padding:20px}.sd-ring,.sd-ring>svg{width:68px;height:68px}.sd-body h3{font-size:20px}.coll-cta{top:8px;right:8px;padding:5px 8px;font-size:9.5px}.scrub-copy p.lead{display:none}}
+@media (prefers-reduced-motion:reduce){.scrub-track{height:auto}.scrub-sticky{position:relative;top:0;height:auto;padding:96px 0}.scrub-steps li{display:block}}
+
+.picker{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:520px;margin:28px auto 0}
+.pk{position:relative;aspect-ratio:1;padding:0;border-radius:14px;overflow:hidden;border:2px solid var(--line);background:none;cursor:pointer;transition:transform .25s var(--ease),border-color .25s,box-shadow .25s,opacity .25s}
+.pk svg{width:100%;height:100%;display:block}
+.pk:hover{transform:translateY(-3px)}
+.pk[aria-pressed=true]{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 12px 26px -10px var(--accent)}
+.pk[aria-pressed=true]::after{content:"";position:absolute;top:5px;right:5px;width:20px;height:20px;border-radius:50%;background:var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2314120c' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/12px no-repeat}
+.picker[data-full=true] .pk[aria-pressed=false]{opacity:.4}
+.pick-count{margin:16px 0 0;color:var(--muted);font-size:14px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.pick-count b{color:var(--accent-2)}
+.pk-dots{display:inline-flex;gap:5px}.pk-dot{width:9px;height:9px;border-radius:50%;background:var(--line);transition:background .3s,transform .3s}.pk-dot.on{background:var(--accent);transform:scale(1.2)}
+.shake{animation:shake .45s}@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
 </style>
 </head>
 <body id="top">
@@ -232,14 +330,19 @@ footer{padding:60px 0 44px;border-top:1px solid var(--line)}
   </div>
 </div></section>
 
-<section id="collections" class="alt"><div class="wrap">
+<section class="scrub alt" id="story" aria-label="Every bolt starts as a single thread."><div class="scrub-track" id="storyTrack"><div class="scrub-sticky"><div class="wrap scrub-grid">
+  <div class="scrub-copy"><span class="eyebrow">Scroll to weave</span><h2>Every bolt starts as a single thread.</h2><ol class="scrub-steps" id="storySteps"><li><b>Dress the warp</b>Hundreds of threads are wound, tensioned and threaded through the loom.</li><li><b>Throw the first picks</b>The shuttle carries the weft across, one row at a time.</li><li><b>The pattern emerges</b>Herringbone appears as the shed changes every fourth pick.</li><li><b>Finish and sign</b>Washed, pressed and signed by the head weaver.</li></ol><div class="scrub-meter" aria-hidden="true"><u id="storyMeter"></u></div><p class="muted scrub-hint">Keep scrolling to advance</p></div>
+  <div class="scrub-visual"><svg id="storySvg" viewBox="0 0 440 360" role="img" aria-label="Every bolt starts as a single thread."></svg><span class="cap"><i></i><span id="storyCap">Dressing the warp</span></span></div>
+</div></div></div></section>
+
+<section id="collections"><div class="wrap">
   <span class="eyebrow reveal">Collections</span>
   <h2 class="reveal">Four cloths, each with a temperament.</h2>
   <p class="lead reveal">Hover a bolt to feel its weave. Every swatch below is rendered live from the same thread engine that powers the studio.</p>
   <div class="grid g4" id="collGrid" style="margin-top:40px"></div>
 </div></section>
 
-<section id="studio"><div class="wrap">
+<section class="alt" id="studio"><div class="wrap">
   <span class="eyebrow reveal">Weave Studio</span>
   <h2 class="reveal">Design your own cloth.</h2>
   <p class="lead reveal">Choose a weave structure and a colourway. The loom renders your fabric in real time, down to the interlacing of warp and weft, with a draped preview as a layered mask.</p>
@@ -275,7 +378,14 @@ footer{padding:60px 0 44px;border-top:1px solid var(--line)}
   </div>
 </div></section>
 
-<section id="craft" class="alt"><div class="wrap">
+<section id="fibre"><div class="wrap"><div class="split">
+  <div class="reveal"><span class="eyebrow">Fibre to cloth</span><h2 class="reveal">Drag to see what the loom does.</h2><p class="lead">On the left, raw fibre as it arrives at the mill. On the right, the same fibre spun, dyed in burnt clay and woven into twill.</p>
+    <div class="cmp-go" role="group" aria-label="Jump the divider"><button type="button" class="gochip" data-go="100" aria-pressed="false">Raw fibre</button><button type="button" class="gochip" data-go="50" aria-pressed="false">Halfway</button><button type="button" class="gochip" data-go="0" aria-pressed="false">Woven cloth</button></div>
+    <p class="muted cmp-hint"><i data-icon="arrow-right"></i>Drag across the frame, or tab to it and use the arrow keys.</p></div>
+  <div class="compare reveal" style="aspect-ratio:4/3"><div class="cmp-a" id="cmpA"></div><div class="cmp-b" id="cmpB"></div><div class="cmp-line" aria-hidden="true"><span class="cmp-knob"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18-6-6 6-6M15 6l6 6-6 6"/></svg></span></div><input class="cmp-range" type="range" min="0" max="100" value="50" aria-label="Divider between Raw fibre and Woven cloth"><span class="cmp-tag l">Raw fibre</span><span class="cmp-tag r">Woven cloth</span></div>
+</div></div></section>
+
+<section class="alt" id="craft"><div class="wrap">
   <span class="eyebrow reveal">The Craft</span>
   <h2 class="reveal">From fibre to folded bolt.</h2>
   <p class="lead reveal">Four stages, roughly six weeks. Every bolt is traceable to its spinner, dyer and weaver.</p>
@@ -283,18 +393,20 @@ footer{padding:60px 0 44px;border-top:1px solid var(--line)}
 </div></section>
 
 <section id="voices"><div class="wrap">
-  <div class="quote reveal">
+  <div class="quote reveal" data-carousel>
     <svg class="ico ico-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.76-2.02-2-2H4c-1.25 0-2 .75-2 1.97V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .01-1 1.03V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.76-2.02-2-2h-4c-1.25 0-2 .75-2 1.97V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
-    <p>They sent a swatchbook you could almost hear. We have specified Ich cloth on every atelier project since.</p>
-    <cite>Interiors studio, Copenhagen</cite>
+    <div class="q-stage"><figure class="q-slide is-on"><p>They sent a swatchbook you could almost hear. We have specified Ich cloth on every atelier project since.</p><cite>Interiors studio, Copenhagen</cite></figure><figure class="q-slide"><p>The Nocturne satin drapes like water. Our atelier cut a whole collection around a single bolt.</p><cite>Couture house, Paris</cite></figure><figure class="q-slide"><p>Traceable to the spinner, the dyer and the weaver. That is the provenance our clients now ask for.</p><cite>Sustainable interiors buyer, London</cite></figure></div>
+    <div class="q-ctrl"><button type="button" class="q-btn" data-d="-1" aria-label="Previous testimonial"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button><div class="q-dots"></div><button type="button" class="q-btn" data-d="1" aria-label="Next testimonial"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button></div>
   </div>
 </div></section>
 
-<section id="swatch" class="alt"><div class="wrap">
+<section class="alt" id="swatch"><div class="wrap">
   <div class="band reveal">
     <span class="eyebrow" style="justify-content:center">Swatchbook</span>
     <h2>Hold the cloth in your hands.</h2>
-    <p class="lead" style="margin:10px auto 0;max-width:52ch">We press a swatchbook of your shortlisted weaves by hand and send it worldwide. Leave an email and we will confirm your selection.</p>
+    <p class="lead" style="margin:10px auto 0;max-width:52ch">Pick up to three cloths for your swatchbook. We press it by hand and send it worldwide.</p>
+    <div class="picker" id="picker" role="group" aria-label="Choose up to three swatches"></div>
+    <p class="pick-count" aria-live="polite"><span class="pk-dots" aria-hidden="true"><i class="pk-dot"></i><i class="pk-dot"></i><i class="pk-dot"></i></span><span><b id="pickN">0</b> of 3 chosen</span><span id="pickState">Tap a cloth to add it</span></p>
     <form class="field" id="swatchForm" novalidate>
       <input type="email" id="swatchEmail" placeholder="you@studio.com" aria-label="Email address" required>
       <button class="btn primary" type="submit" data-ico="arrow-right">Request swatchbook</button>
@@ -316,6 +428,70 @@ footer{padding:60px 0 44px;border-top:1px solid var(--line)}
 </div></footer>
 
 <script>
+window.UX=(()=>{
+  const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  const onView=(el,fn,th=.35)=>{if(!('IntersectionObserver'in window))return fn();const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io.disconnect();fn();}}),{threshold:th});io.observe(el);};
+  const watch=(el,cb)=>{if(!('IntersectionObserver'in window)){cb(true);return;}new IntersectionObserver(es=>es.forEach(e=>cb(e.isIntersecting)),{threshold:.25}).observe(el);};
+  const bar=document.createElement('div');bar.className='progressbar';bar.setAttribute('aria-hidden','true');document.body.prepend(bar);
+  let pr=0;const prog=()=>{pr=0;const h=document.documentElement.scrollHeight-innerHeight;bar.style.transform=`scaleX(${h>0?Math.min(1,scrollY/h):0})`;};
+  addEventListener('scroll',()=>{if(!pr)pr=requestAnimationFrame(prog);},{passive:true});prog();
+  if(!RM)document.querySelectorAll('h2.reveal').forEach(h=>{if(h.children.length)return;const t=h.textContent.trim();h.setAttribute('aria-label',t);h.classList.add('splitw');
+    h.innerHTML=t.split(/\s+/).map((w,i)=>`<span class="w" aria-hidden="true"><span style="transition-delay:${i*55}ms">${w.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}</span></span>`).join(' ');});
+  if(fine){
+    document.addEventListener('pointermove',e=>{const c=e.target.closest&&e.target.closest('.card,.coll,.piece,.proj');if(!c)return;const r=c.getBoundingClientRect();c.style.setProperty('--sx',(e.clientX-r.left)+'px');c.style.setProperty('--sy',(e.clientY-r.top)+'px');},{passive:true});
+    if(!RM)document.querySelectorAll('.btn.primary').forEach(b=>{b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;b.style.transform=`translate(${(x*12).toFixed(1)}px,${(y*8-2).toFixed(1)}px)`;});b.addEventListener('pointerleave',()=>{b.style.transform='';});});
+  }
+  const compare=el=>{const rg=el.querySelector('.cmp-range');let user=false,drag=false,cur=50;
+    const set=v=>{cur=Math.max(0,Math.min(100,v));el.style.setProperty('--p',cur+'%');rg.value=Math.round(cur);rg.setAttribute('aria-valuetext',Math.round(cur)+' percent');};
+    const at=e=>{const b=el.getBoundingClientRect();set((e.clientX-b.left)/b.width*100);};
+    const tween=to=>{if(RM){set(to);return;}const from=cur,t0=performance.now();const st=t=>{const p=Math.min(1,(t-t0)/650),e=1-Math.pow(1-p,3);set(from+(to-from)*e);if(p<1)requestAnimationFrame(st);};requestAnimationFrame(st);};
+    el.addEventListener('pointerdown',e=>{drag=true;user=true;try{el.setPointerCapture(e.pointerId);}catch(_){}at(e);});
+    el.addEventListener('pointermove',e=>{if(drag)at(e);});
+    ['pointerup','pointercancel','lostpointercapture'].forEach(t=>el.addEventListener(t,()=>{drag=false;}));
+    rg.addEventListener('input',()=>{user=true;set(+rg.value);});
+    const sec=el.closest('section');if(sec)sec.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>{user=true;sec.querySelectorAll('[data-go]').forEach(o=>o.setAttribute('aria-pressed',o===b));tween(+b.dataset.go);}));
+    set(50);
+    if(!RM)onView(el,()=>{const t0=performance.now(),D=2800,K=[50,86,14,50];const st=t=>{if(user)return;const p=Math.min(1,(t-t0)/D),s=Math.min(2,Math.floor(p*3)),lp=p*3-s,e=lp<.5?2*lp*lp:1-Math.pow(-2*lp+2,2)/2;set(K[s]+(K[s+1]-K[s])*e);if(p<1)requestAnimationFrame(st);};requestAnimationFrame(st);},.5);
+  };
+  const steps=(track,data,ico,esc)=>{
+    track.setAttribute('role','tablist');
+    track.insertAdjacentHTML('beforeend',data.map((s,i)=>`<button class="step reveal" type="button" role="tab" aria-selected="false" data-i="${i}" style="transition-delay:${i*90}ms"><span class="node">${ico(s.ic)}</span><h3>${esc(s.t)}</h3><p>${esc(s.d)}</p></button>`).join(''));
+    const det=document.createElement('div');det.className='step-detail card reveal';det.setAttribute('role','tabpanel');det.setAttribute('aria-live','polite');track.after(det);
+    const btns=[...track.querySelectorAll('.step')],fill=track.querySelector('.fillbar'),C=2*Math.PI*30;
+    let cur=-1,auto=null,user=false;
+    const stop=()=>{clearInterval(auto);auto=null;};
+    const sel=(i,focus)=>{if(i===cur)return;cur=i;
+      btns.forEach((b,k)=>{b.setAttribute('aria-selected',k===i);b.tabIndex=k===i?0:-1;b.classList.toggle('cur',k===i);b.querySelector('.node').classList.toggle('on',k<=i);});
+      if(fill)fill.style.width=`calc((100% + 22px) * ${i} / ${data.length})`;
+      const s=data[i];det.classList.remove('swap');void det.offsetWidth;det.classList.add('swap');
+      det.innerHTML=`<div class="sd-ring"><svg viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="30" class="sd-bg"/><circle cx="36" cy="36" r="30" class="sd-fg" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-i/data.length)}"/></svg><span>${ico(s.ic,'ico ico-lg')}</span></div><div class="sd-body"><span class="eyebrow">Stage ${i+1} of ${data.length}${s.time?' · '+esc(s.time):''}</span><h3>${esc(s.t)}</h3><p>${esc(s.x||s.d)}</p></div>`;
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{const f=det.querySelector('.sd-fg');if(f)f.style.strokeDashoffset=C*(1-(i+1)/data.length);}));
+      if(focus)btns[i].focus();};
+    btns.forEach((b,i)=>b.addEventListener('click',()=>{user=true;stop();sel(i);}));
+    track.addEventListener('keydown',e=>{if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;e.preventDefault();user=true;stop();sel((cur+(e.key==='ArrowRight'?1:data.length-1))%data.length,true);});
+    sel(0);
+    if(!RM)watch(track,v=>{if(v&&!user&&!auto)auto=setInterval(()=>{if(!document.hidden)sel((cur+1)%data.length);},3800);if(!v)stop();});
+  };
+  const carousel=root=>{const slides=[...root.querySelectorAll('.q-slide')],dots=root.querySelector('.q-dots');let i=0,t=null;
+    dots.innerHTML=slides.map((_,k)=>`<button type="button" class="q-dot" aria-label="Show testimonial ${k+1}"></button>`).join('');
+    const ds=[...dots.children];
+    const go=k=>{i=(k+slides.length)%slides.length;slides.forEach((s,n)=>{s.classList.toggle('is-on',n===i);s.setAttribute('aria-hidden',n!==i);});ds.forEach((d,n)=>d.setAttribute('aria-current',n===i));};
+    const restart=()=>{clearInterval(t);if(!RM)t=setInterval(()=>{if(!document.hidden&&!root.matches(':hover,:focus-within'))go(i+1);},6000);};
+    root.querySelectorAll('[data-d]').forEach(b=>b.addEventListener('click',()=>{go(i+(+b.dataset.d));restart();}));
+    ds.forEach((d,n)=>d.addEventListener('click',()=>{go(n);restart();}));
+    let sx=null;const stg=root.querySelector('.q-stage');stg.addEventListener('pointerdown',e=>{sx=e.clientX;});stg.addEventListener('pointerup',e=>{if(sx!==null&&Math.abs(e.clientX-sx)>40){go(i+(e.clientX<sx?1:-1));restart();}sx=null;});
+    go(0);restart();
+  };
+  const scrub=(track,fn)=>{if(RM){fn(1);return;}let raf=0;const NAV=72;
+    const upd=()=>{raf=0;const r=track.getBoundingClientRect(),span=r.height-(innerHeight-NAV);fn(Math.max(0,Math.min(1,(NAV-r.top)/(span>0?span:1))));};
+    addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(upd);},{passive:true});addEventListener('resize',upd);upd();};
+  const stepsList=(ol,p,th)=>{let k=0;th.forEach((v,n)=>{if(p>=v)k=n;});[...ol.children].forEach((li,n)=>li.classList.toggle('on',n===k));return k;};
+  document.querySelectorAll('.compare').forEach(compare);
+  document.querySelectorAll('[data-carousel]').forEach(carousel);
+  return {RM,fine,onView,watch,steps,scrub,stepsList};
+})();
+</script>
+<script>
 (() => {
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const $ = (s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
@@ -335,6 +511,7 @@ footer{padding:60px 0 44px;border-top:1px solid var(--line)}
     scissors:'<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/>',
     package:'<path d="m7.5 4.27 9 5.15M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/>'
   };
+  Object.assign(ICONS,{x:'<path d="M18 6 6 18M6 6l12 12"/>',calendar:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',clock:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>','check-circle':'<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>','arrow-right':'<path d="M5 12h14M13 5l7 7-7 7"/>',building:'<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/>',ruler:'<path d="M21.3 8.7 8.7 21.3a1 1 0 0 1-1.4 0l-4.6-4.6a1 1 0 0 1 0-1.4L15.3 2.7a1 1 0 0 1 1.4 0l4.6 4.6a1 1 0 0 1 0 1.4Z"/><path d="m7.5 10.5 2 2M10.5 7.5l2 2M13.5 4.5l2 2"/>'});
   const ico=(n,cls='ico')=>`<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICONS[n]||''}</svg>`;
   // inject placeholder icons + data-ico
   $$('i[data-icon]').forEach(el=>{el.outerHTML=ico(el.dataset.icon);});
@@ -432,13 +609,13 @@ footer{padding:60px 0 44px;border-top:1px solid var(--line)}
     {ic:'package',t:'Finish',d:'Washed, pressed, folded and signed.',on:false}
   ];
   const doneN=STEPS.filter(s=>s.on).length;
-  $('#track').insertAdjacentHTML('beforeend',STEPS.map((s,i)=>`<div class="step reveal" style="transition-delay:${i*90}ms"><span class="node ${s.on?'on':''}">${ico(s.ic)}</span><h3>${esc(s.t)}</h3><p>${esc(s.d)}</p></div>`).join(''));
-  onView($('#track'),()=>{$('#track .fillbar').style.width=`calc((100% + 22px) * ${doneN-1} / ${STEPS.length})`;});
+  const STEP_X=[{"time": "Week 1", "x": "Fibre is sorted by hand, carded and spun to an exact count in small lots, so every bolt shares one consistent yarn."}, {"time": "Week 2", "x": "Yarn is dyed in plant and mineral baths, then air-dried in daylight. Each lot is matched against the master swatch."}, {"time": "Weeks 3 to 5", "x": "The warp is dressed on a heritage loom and woven at a slow beat, which keeps the cloth dense and the hand soft."}, {"time": "Week 6", "x": "The cloth is washed, pressed, measured and signed by the head weaver before it is folded for dispatch."}];
+  UX.steps($('#track'),STEPS.map((s,k)=>Object.assign({},s,STEP_X[k])),ico,esc);
 
   // ---- swatch form ----
   $('#swatchForm').addEventListener('submit',e=>{
     e.preventDefault();const v=$('#swatchEmail').value.trim();const ok=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
-    $('#swatchNote').textContent=ok?'Thank you. We will confirm your swatchbook selection by email.':'Please enter a valid email address.';
+    $('#swatchNote').textContent=ok?(PICK_SEL.size?`Thank you. Your swatchbook of ${[...PICK_SEL].map(PICK_NAME).join(', ')} is reserved. We will confirm by email.`:'Thank you. Pick your cloths above, or we will email you to choose.'):'Please enter a valid email address.';
     $('#swatchNote').style.color=ok?'var(--accent-2)':'var(--bad,#e5736b)';
     if(ok)$('#swatchForm').reset();
   });
@@ -471,6 +648,62 @@ footer{padding:60px 0 44px;border-top:1px solid var(--line)}
       }
       requestAnimationFrame(tick);};
     requestAnimationFrame(tick);
+  })();
+
+  // ---- collection cards open in the studio ----
+  const syncOpts=()=>[['#weaveOpts','weave'],['#colorOpts','color'],['#weightOpts','weight']].forEach(([h,k])=>$$('.opt',$(h)).forEach(o=>o.setAttribute('aria-pressed',o.dataset.k===state[k])));
+  const flash=el=>{el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');};
+  $$('#collGrid .coll').forEach((card,i)=>{const c=COLL[i];card.setAttribute('role','button');card.tabIndex=0;card.setAttribute('aria-label',`Open ${c.name} in the Weave Studio`);
+    card.insertAdjacentHTML('beforeend',`<span class="coll-cta">${ico('arrow-right','ico ico-sm')}Open in studio</span>`);
+    const go=()=>{state.color=c.color;state.weave=c.weave;syncOpts();renderLoom();$('#studio').scrollIntoView({behavior:RM?'auto':'smooth'});setTimeout(()=>flash($('.viz-stage')),RM?0:700);};
+    card.addEventListener('click',go);card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});});
+
+  // ---- scroll-driven story: your scroll weaves the cloth ----
+  (()=>{const sv=$('#storySvg');if(!sv)return;
+    const c=COLORS.sage,w=WEAVES.herringbone,COLS=24,CELL=14,X0=52,Y0=44,ROWS=20,BOT=330,LEN=BOT-Y0;
+    let s=`<rect width="440" height="360" fill="#0e1018"/><g id="sWarp">`;
+    for(let x=0;x<COLS;x++){const lx=X0+x*CELL+CELL/2;s+=`<line x1="${lx}" y1="${Y0}" x2="${lx}" y2="${BOT}" stroke="${c.warp}" stroke-width="${CELL*.55}" stroke-dasharray="${LEN}" stroke-dashoffset="${LEN}"/>`;}
+    s+=`</g><g id="sCloth"></g><line id="sPick" stroke="${c.hl}" stroke-width="3" stroke-linecap="round"/><g id="sShut"><path d="M-26 0 Q-14 -8 0 -8 Q14 -8 26 0 Q14 8 0 8 Q-14 8 -26 0Z" fill="#cfa86a"/><path d="M-13 0H13" stroke="#14120c" stroke-width="2" stroke-linecap="round"/></g>
+      <rect x="30" y="22" width="380" height="12" rx="6" fill="#2a2a33"/><rect x="30" y="334" width="380" height="12" rx="6" fill="#2a2a33"/>
+      <defs><linearGradient id="sSheenG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></linearGradient></defs>
+      <rect id="sSheen" x="${X0}" y="${Y0}" width="${COLS*CELL}" height="${ROWS*CELL}" fill="url(#sSheenG)" opacity="0"/>
+      <g id="sStamp" opacity="0"><circle r="30" fill="#14120c" stroke="#cfa86a" stroke-width="2"/><circle r="24" fill="none" stroke="#cfa86a" stroke-width="1" stroke-dasharray="3 3"/><text y="5" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="15" font-weight="600" fill="#e3c48c">Signed</text></g>`;
+    sv.innerHTML=s;
+    const q=id=>sv.querySelector(id),lines=[...sv.querySelectorAll('#sWarp line')],ol=$('#storySteps'),meter=$('#storyMeter'),cap=$('#storyCap');
+    const CAPS=['Dressing the warp','Throwing the first picks','Herringbone emerging','Finished and signed'];let last=-1;
+    UX.scrub($('#storyTrack'),p=>{
+      const k=UX.stepsList(ol,p,[0,.15,.45,.85]);cap.textContent=CAPS[k];meter.style.width=(p*100)+'%';
+      const wp=Math.min(1,p/.15);lines.forEach((l,i)=>{const d=Math.max(0,Math.min(1,wp*1.4-i/COLS*.4));l.setAttribute('stroke-dashoffset',(LEN*(1-d)).toFixed(1));});
+      const rp=Math.max(0,Math.min(1,(p-.15)/.7))*ROWS,full=Math.min(ROWS,Math.floor(rp)),frac=full>=ROWS?0:rp-full;
+      if(full!==last){last=full;q('#sCloth').innerHTML=full?weaveCells(c,w,COLS,full,CELL,'st',X0,Y0):'';}
+      const fell=Y0+full*CELL+CELL/2,dir=full%2?-1:1,span=COLS*CELL+52,sx=dir>0?X0-26+frac*span:X0+COLS*CELL+26-frac*span,on=p>.15&&full<ROWS;
+      q('#sShut').setAttribute('transform',`translate(${sx.toFixed(1)} ${fell})`);q('#sShut').style.opacity=on?1:0;
+      const pk=q('#sPick');pk.setAttribute('x1',dir>0?X0-26:X0+COLS*CELL+26);pk.setAttribute('x2',sx.toFixed(1));pk.setAttribute('y1',fell);pk.setAttribute('y2',fell);pk.style.opacity=on?1:0;
+      const f=Math.max(0,Math.min(1,(p-.86)/.1));q('#sSheen').setAttribute('opacity',f.toFixed(2));q('#sStamp').setAttribute('opacity',f.toFixed(2));
+      q('#sStamp').setAttribute('transform',`translate(350 296) scale(${(.6+.4*f).toFixed(2)}) rotate(${(-14*(1-f)).toFixed(1)})`);
+    });
+  })();
+
+  // ---- compare: raw fibre vs woven cloth (2D layer mask) ----
+  (()=>{if(!$('#cmpA'))return;let seed=11;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+    let a=`<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><radialGradient id="fibG" cx="50%" cy="45%" r="70%"><stop offset="0" stop-color="#3a3326"/><stop offset="1" stop-color="#15130f"/></radialGradient></defs><rect width="400" height="300" fill="url(#fibG)"/><g fill="none" stroke-linecap="round">`;
+    const tones=['#e8dcc0','#d9c9a3','#cbb98f','#f3ead6','#b8a47a'];
+    for(let i=0;i<240;i++){const x=rnd()*440-20,y=rnd()*320-10,l=30+rnd()*90,an=rnd()*Math.PI*2,c1=rnd()*40-20,c2=rnd()*40-20,x2=x+Math.cos(an)*l,y2=y+Math.sin(an)*l;
+      a+=`<path d="M${x.toFixed(1)} ${y.toFixed(1)}C${(x+c1).toFixed(1)} ${(y+c2).toFixed(1)} ${(x2-c2).toFixed(1)} ${(y2+c1).toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}" stroke="${tones[i%5]}" stroke-width="${(.4+rnd()*1.3).toFixed(2)}" opacity="${(.25+rnd()*.6).toFixed(2)}"/>`;}
+    $('#cmpA').innerHTML=a+`</g></svg>`;
+    $('#cmpB').innerHTML=`<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${weaveCells(COLORS.clay,WEAVES.twill,30,23,400/30,'cmb')}<defs><linearGradient id="cmbS" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".14"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></linearGradient></defs><rect width="400" height="300" fill="url(#cmbS)"/></svg>`;
+  })();
+
+  // ---- swatchbook picker (choose up to three) ----
+  const PICK_SEL=new Set(),PICK_OPTS=[];Object.keys(COLORS).forEach(c=>['twill','satin'].forEach(w=>PICK_OPTS.push([c,w])));
+  const PICK_NAME=i=>`${COLORS[PICK_OPTS[i][0]].name} ${WEAVES[PICK_OPTS[i][1]].name}`;
+  (()=>{const pk=$('#picker');if(!pk)return;
+    pk.innerHTML=PICK_OPTS.map(([c,w],i)=>`<button type="button" class="pk" aria-pressed="false" data-i="${i}" aria-label="${esc(PICK_NAME(i))}" title="${esc(PICK_NAME(i))}"><svg viewBox="0 0 60 60" aria-hidden="true">${weaveCells(COLORS[c],WEAVES[w],10,10,6,'pk'+i)}</svg></button>`).join('');
+    const upd=()=>{const n=PICK_SEL.size;$('#pickN').textContent=n;$('#pickState').textContent=n===3?'Swatchbook ready':n?`Add ${3-n} more, or request now`:'Tap a cloth to add it';$$('.pk-dot').forEach((d,k)=>d.classList.toggle('on',k<n));pk.dataset.full=n===3;};
+    pk.addEventListener('click',e=>{const b=e.target.closest('.pk');if(!b)return;const i=+b.dataset.i;
+      if(PICK_SEL.has(i))PICK_SEL.delete(i);else if(PICK_SEL.size<3)PICK_SEL.add(i);else{const c=$('.pick-count');c.classList.remove('shake');void c.offsetWidth;c.classList.add('shake');$('#pickState').textContent='Three is the limit. Remove one to swap';return;}
+      b.setAttribute('aria-pressed',PICK_SEL.has(i));upd();});
+    upd();
   })();
 
   // ---- reveal + scroll spy ----
