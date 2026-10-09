@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ich Textilles — The Art of Woven Cloth</title>
+<meta name="description" content="Ich Textilles weaves heirloom-grade fabric on heritage looms. Explore collections, design your own weave, and request a swatchbook.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  --bg:#11131c; --surface:#171a26; --surface-2:#1d2130; --ink:#f3efe6; --ink-2:#d7d1c2; --muted:#9a948a; --line:rgba(255,255,255,.08);
+  --accent:#cfa86a; --accent-2:#e3c48c; --accent-ink:#14120c; --accent-soft:rgba(207,168,106,.14);
+  --radius:20px; --ease:cubic-bezier(.2,.8,.2,1);
+  --shadow-1:0 1px 2px rgba(0,0,0,.3),0 18px 46px -20px rgba(0,0,0,.7);
+  --display:'Cormorant Garamond',Georgia,serif; --sans:'Manrope',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --max:1200px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+section{padding:120px 0;position:relative}
+section.alt{background:var(--surface)}
+.eyebrow{display:inline-flex;gap:9px;align-items:center;font:700 12.5px/1.5 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.eyebrow::before{content:"";width:26px;height:1px;background:linear-gradient(90deg,var(--accent),transparent)}
+h1,h2,h3{margin:0;line-height:1.08;letter-spacing:-.01em}
+h1{font:600 clamp(46px,7vw,92px)/1 var(--display)}
+h2{font:600 clamp(34px,4.4vw,58px)/1.06 var(--display);margin:16px 0 16px}
+h3{font:700 19px/1.3 var(--sans)}
+.lead{font-size:clamp(17px,1.5vw,20px);color:var(--ink-2);max-width:60ch}
+.muted{color:var(--muted)}
+.ico{width:20px;height:20px;color:var(--accent);flex:none;vertical-align:-4px}
+.ico-sm{width:16px;height:16px}.ico-lg{width:30px;height:30px}
+.chipico{display:grid;place-items:center;width:52px;height:52px;border-radius:15px;background:var(--accent-soft);color:var(--accent);border:1px solid var(--line)}
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line);transition:height .3s var(--ease)}
+.nav .wrap{display:flex;align-items:center;gap:18px;height:72px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.02em}
+.brand b{font:600 22px var(--display);letter-spacing:.04em}
+.brandmark{width:34px;height:34px;border-radius:9px;background:linear-gradient(140deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:var(--accent-ink)}
+.navlinks{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+.navlinks::-webkit-scrollbar{display:none}
+.navlinks a{padding:9px 14px;border-radius:999px;font-size:14px;font-weight:600;color:var(--muted);white-space:nowrap;transition:color .25s,background .25s}
+.navlinks a:hover{color:var(--ink)} .navlinks a.active{color:var(--accent)}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border-radius:999px;font:700 15px var(--sans);border:1px solid var(--line);background:var(--surface-2);color:var(--ink);cursor:pointer;transition:transform .25s var(--ease),box-shadow .25s,background .25s}
+.btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-1)}
+.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--accent-ink);border-color:transparent}
+.btn.primary .ico{color:var(--accent-ink)}
+.btn.ghost{background:transparent}
+/* hero */
+.hero{position:relative;min-height:clamp(620px,88vh,900px);display:flex;align-items:center;padding:110px 0 80px;overflow:hidden}
+#weave{position:absolute;inset:0;width:100%;height:100%;opacity:.55;pointer-events:none}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 78% 15%,transparent,var(--bg) 72%);pointer-events:none}
+.hero .wrap{position:relative;z-index:2;max-width:1000px}
+.hero h1{max-width:14ch}
+.hero .lead{margin-top:22px}
+.cta-row{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+.hero-meta{margin-top:54px;display:flex;gap:40px;flex-wrap:wrap}
+.hero-meta div b{display:block;font:600 40px/1 var(--display);color:var(--accent-2)}
+.hero-meta div span{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+/* marquee */
+.marquee{border-block:1px solid var(--line);background:var(--surface);overflow:hidden;padding:20px 0}
+.mtrack{display:flex;gap:56px;width:max-content;animation:scrollx 46s linear infinite}
+.marquee:hover .mtrack,.marquee:focus-within .mtrack{animation-play-state:paused}
+.mtrack span{font:600 17px var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);display:inline-flex;align-items:center;gap:56px}
+.mtrack span::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+@keyframes scrollx{to{transform:translateX(-50%)}}
+/* reveal */
+.js .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
+/* grids + cards */
+.grid{display:grid;gap:24px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow-1)}
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+/* kpi */
+.kpi b{display:block;font:600 52px/1 var(--display);color:var(--ink);margin:14px 0 6px}
+.kpi small{display:block;color:var(--muted);font-size:13px;letter-spacing:.04em}
+/* collection cards */
+.coll{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--surface-2);aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;transition:transform .4s var(--ease),box-shadow .4s}
+.coll:hover{transform:translateY(-4px);box-shadow:var(--shadow-1)}
+.coll .sw{position:absolute;inset:0;z-index:0}
+.coll::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(10,11,16,.86));z-index:1}
+.coll>*{position:relative;z-index:2}
+.coll h3{font:600 26px var(--display);letter-spacing:.01em}
+.coll p{margin:4px 0 0;color:var(--ink-2);font-size:14px}
+.tagrow{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.tag{font:700 11px var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2);background:color-mix(in srgb,var(--bg) 40%,transparent)}
+/* visualizer */
+.viz{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:start}
+.viz-stage{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow-1)}
+.viz-stage svg{width:100%;height:auto;display:block}
+.viz-drape{position:absolute;right:16px;bottom:16px;width:40%;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 10px 30px -10px rgba(0,0,0,.7);background:var(--bg)}
+.viz-drape .lbl{position:absolute;left:0;right:0;bottom:0;padding:7px 10px;font:700 10px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:linear-gradient(0deg,rgba(10,11,16,.9),transparent)}
+.ctrl{margin-top:4px}
+.ctrl h3{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:12px}
+.opts{display:flex;gap:10px;flex-wrap:wrap}
+.opt{min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink-2);font:600 14px var(--sans);cursor:pointer;transition:all .25s var(--ease);display:inline-flex;align-items:center;gap:9px}
+.opt:hover{color:var(--ink);border-color:var(--accent)}
+.opt[aria-pressed="true"]{border-color:var(--accent);color:var(--ink);background:var(--accent-soft)}
+.swatchchip{width:20px;height:20px;border-radius:6px;border:1px solid rgba(255,255,255,.25)}
+.ctrl+.ctrl{margin-top:26px}
+.spec{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px}
+.spec div{padding:16px 18px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line)}
+.spec b{display:block;font:600 24px var(--display);color:var(--accent-2)}
+.spec span{font-size:12.5px;color:var(--muted);letter-spacing:.05em}
+/* process XP track */
+.track{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:40px}
+.track:before{content:"";position:absolute;left:28px;right:28px;top:27px;height:2px;background:var(--line)}
+.track .fillbar{position:absolute;left:28px;top:27px;height:2px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width 1.6s var(--ease)}
+.node{position:relative;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:2px solid var(--line);color:var(--muted);z-index:1}
+.node.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.step h3{margin-top:18px}
+.step p{margin:6px 0 0;color:var(--muted);font-size:14.5px}
+/* quote */
+.quote{max-width:900px;margin:0 auto;text-align:center}
+.quote p{font:500 clamp(24px,3.2vw,40px)/1.3 var(--display);color:var(--ink)}
+.quote .ico-lg{color:var(--accent);opacity:.7}
+.quote cite{display:block;margin-top:24px;font-style:normal;color:var(--muted);letter-spacing:.06em;font-size:14px;text-transform:uppercase}
+/* cta band */
+.band{background:linear-gradient(135deg,var(--surface-2),var(--surface));border:1px solid var(--line);border-radius:28px;padding:56px;text-align:center;position:relative;overflow:hidden}
+.band::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 120% at 50% -20%,var(--accent-soft),transparent);pointer-events:none}
+.band>*{position:relative}
+.field{display:flex;gap:10px;max-width:460px;margin:26px auto 0;flex-wrap:wrap}
+.field input{flex:1;min-width:200px;min-height:50px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:500 15px var(--sans)}
+.field input:focus{outline:2px solid var(--accent);outline-offset:2px}
+.note{margin-top:14px;font-size:13px;color:var(--muted);min-height:18px}
+footer{padding:60px 0 44px;border-top:1px solid var(--line)}
+.fcols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+.fcols a{color:var(--muted);display:block;padding:5px 0;font-size:14.5px;transition:color .2s}
+.fcols a:hover{color:var(--accent)}
+.fcols h4{font:700 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin:0 0 10px}
+.fbottom{margin-top:44px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:13.5px}
+@media (max-width:980px){.split,.viz{grid-template-columns:1fr}.g3,.g4{grid-template-columns:repeat(2,1fr)}.track{grid-template-columns:repeat(2,1fr)}.track:before,.track .fillbar{display:none}.fcols{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){section{padding:72px 0}.wrap{padding:0 16px}.g3,.g4,.fcols{grid-template-columns:1fr}.hero-meta{gap:26px}.band{padding:36px 22px}.spec{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}html{scroll-behavior:auto}.js .reveal{opacity:1;transform:none}}
+
+/* interactive 2D layer mask: a second patterned layer revealed through a cursor-following mask */
+.hero .masklayer{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .5s var(--ease);
+  background:radial-gradient(circle at 50% 50%,var(--accent-soft),transparent 60%),repeating-linear-gradient(45deg,color-mix(in srgb,var(--accent) 40%,transparent) 0 1px,transparent 1px 14px),repeating-linear-gradient(-45deg,color-mix(in srgb,var(--accent-2) 30%,transparent) 0 1px,transparent 1px 14px);
+  -webkit-mask-image:radial-gradient(circle 240px at var(--mx,50%) var(--my,40%),#000 0,rgba(0,0,0,.55) 45%,transparent 72%);
+          mask-image:radial-gradient(circle 240px at var(--mx,50%) var(--my,40%),#000 0,rgba(0,0,0,.55) 45%,transparent 72%)}
+.hero:hover .masklayer{opacity:1}
+.tilt{transform-style:preserve-3d;will-change:transform}
+@media (hover:none),(prefers-reduced-motion:reduce){.hero .masklayer{display:none}}
+
+.split>*{min-width:0}
+.brand{flex:none}.brand b{white-space:nowrap}
+.brandmark .ico{color:var(--accent-ink)}
+.fcols a.brand{display:flex;align-items:center}
+.swatchchip{box-shadow:0 0 0 1px rgba(255,255,255,.35)}
+.track:before{right:auto;width:calc((100% + 22px)*3/4)}
+.hero .wrap{max-width:var(--max);display:grid;grid-template-columns:1.08fr .92fr;gap:56px;align-items:center}
+.hero-visual{position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-1),0 0 0 1px color-mix(in srgb,var(--accent) 14%,transparent),0 40px 90px -40px color-mix(in srgb,var(--accent) 40%,transparent);background:var(--surface)}
+.hero-visual svg{position:relative;display:block;width:100%;height:auto}
+.hero-visual .cap{position:absolute;left:14px;bottom:14px;display:inline-flex;align-items:center;gap:9px;padding:8px 13px;border-radius:999px;background:color-mix(in srgb,var(--bg) 62%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);font:700 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink);max-width:calc(100% - 28px)}
+.hero-visual .cap i{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none;animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 60%,transparent)}100%{box-shadow:0 0 0 10px transparent}}
+@media (max-width:980px){.hero .wrap{grid-template-columns:1fr;gap:44px}.hero{min-height:0}}
+@media (max-width:620px){
+ .navlinks{-webkit-mask-image:linear-gradient(90deg,#000 78%,transparent);mask-image:linear-gradient(90deg,#000 78%,transparent)}
+ .hero-meta{display:grid;grid-template-columns:repeat(3,auto);gap:18px;justify-content:start}.hero-meta div b{font-size:30px}.hero-meta div span{font-size:10.5px}
+ .g4{grid-template-columns:1fr 1fr;gap:14px}
+ .coll,.proj{aspect-ratio:3/4;padding:14px}.coll h3,.proj h3{font-size:18px}.coll p,.proj p{font-size:12px}.coll .tagrow,.proj .tag{display:none}
+ .piece{padding:14px}.piece h3{font-size:18px}.piece p{font-size:12.5px}.piece .thumb{margin-bottom:12px}
+}
+@media (max-width:520px){.g2{grid-template-columns:1fr}}
+@media (max-width:620px){.viz-drape{width:34%}}
+
+@media (max-width:620px){.spec{grid-template-columns:1fr 1fr!important;gap:10px}.spec div{padding:12px 14px}.spec b{font-size:19px}}
+@media (max-width:520px){.g2:has(> .kpi){grid-template-columns:1fr 1fr;gap:12px}.card.kpi{padding:16px}.kpi b{font-size:34px;margin:10px 0 4px}.kpi .chipico{width:40px;height:40px;border-radius:12px}.kpi strong{font-size:14px;line-height:1.3;display:block}}
+.hero h1{font-size:clamp(44px,5.6vw,80px)}
+</style>
+</head>
+<body id="top">
+
+<nav class="nav" aria-label="Primary"><div class="wrap">
+  <a class="brand" href="#top" aria-label="Ich Textilles home">
+    <span class="brandmark"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M3 10h18M3 14h18M3 18h18"/><path d="M7 4v16M12 4v16M17 4v16" opacity=".55"/></svg></span>
+    <b>Ich Textilles</b>
+  </a>
+  <div class="navlinks">
+    <a href="#top">Home</a><a href="#house">The House</a><a href="#collections">Collections</a><a href="#studio">Weave Studio</a><a href="#craft">Craft</a><a href="#swatch">Swatchbook</a>
+  </div>
+</div></nav>
+
+<header class="hero">
+  <canvas id="weave" aria-hidden="true"></canvas>
+  <div class="wrap"><div class="hero-copy">
+    <span class="eyebrow reveal">Est. heritage mills · Woven to order</span>
+    <h1 class="reveal">The quiet luxury of cloth, woven thread by thread.</h1>
+    <p class="lead reveal">Ich Textilles crafts heirloom-grade fabric on heritage looms, in natural fibres dyed to depth. Design your own weave in the studio, then order a swatchbook pressed by hand.</p>
+    <div class="cta-row reveal">
+      <a class="btn primary" href="#studio" data-ico="layers">Open the Weave Studio</a>
+      <a class="btn ghost" href="#collections" data-ico="eye">View collections</a>
+    </div>
+    <div class="hero-meta reveal">
+      <div><b>1897</b><span>Founding year</span></div>
+      <div><b data-to="42" data-suf="">42</b><span>Living weave patterns</span></div>
+      <div><b data-to="100" data-suf="%">100%</b><span>Natural fibre</span></div>
+    </div>
+  </div>
+  <div class="hero-visual reveal"><svg id="heroLoom" viewBox="0 0 440 400" role="img" aria-label="Animated loom weaving cloth row by row"></svg><span class="cap"><i></i><span id="heroCap">Live loom</span></span></div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true"><div class="mtrack">
+  <span>Belgian Linen<span></span>Himalayan Wool<span></span>Mulberry Silk<span></span>Egyptian Cotton<span></span>Alpaca Blend<span></span>Raw Tussar<span></span></span>
+  <span>Belgian Linen<span></span>Himalayan Wool<span></span>Mulberry Silk<span></span>Egyptian Cotton<span></span>Alpaca Blend<span></span>Raw Tussar<span></span></span>
+</div></div>
+
+<section id="house"><div class="wrap">
+  <div class="split">
+    <div class="reveal">
+      <span class="eyebrow">The House</span>
+      <h2>A mill that still listens to the loom.</h2>
+      <p class="lead">Four generations of weavers, one principle: let the fibre lead. We spin, dye and weave in small lots, so every bolt carries the grain of the hand that made it. No seconds, no shortcuts, no synthetic filler.</p>
+      <div class="grid g2" style="margin-top:30px">
+        <div class="card" style="padding:20px"><span class="chipico"><i data-icon="award"></i></span><h3 style="margin-top:14px">Master-woven</h3><p class="muted" style="margin:6px 0 0;font-size:14.5px">Each pattern signed off by a head weaver before it leaves the floor.</p></div>
+        <div class="card" style="padding:20px"><span class="chipico"><i data-icon="leaf"></i></span><h3 style="margin-top:14px">Low-impact dye</h3><p class="muted" style="margin:6px 0 0;font-size:14.5px">Plant and mineral dyes, closed-loop water, air-dried in daylight.</p></div>
+      </div>
+    </div>
+    <div class="grid g2 reveal">
+      <div class="card kpi"><span class="chipico"><i data-icon="layers"></i></span><b data-to="129">129</b><strong>Years at the loom</strong><small>Continuous family operation</small></div>
+      <div class="card kpi"><span class="chipico"><i data-icon="activity"></i></span><b data-to="18">18</b><strong>Heritage looms</strong><small>Restored and running daily</small></div>
+      <div class="card kpi"><span class="chipico"><i data-icon="droplet"></i></span><b data-to="92" data-suf="%">92%</b><strong>Water reclaimed</strong><small>Closed-loop dye house</small></div>
+      <div class="card kpi"><span class="chipico"><i data-icon="globe"></i></span><b data-to="26">26</b><strong>Ateliers supplied</strong><small>Across fashion and interiors</small></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="collections" class="alt"><div class="wrap">
+  <span class="eyebrow reveal">Collections</span>
+  <h2 class="reveal">Four cloths, each with a temperament.</h2>
+  <p class="lead reveal">Hover a bolt to feel its weave. Every swatch below is rendered live from the same thread engine that powers the studio.</p>
+  <div class="grid g4" id="collGrid" style="margin-top:40px"></div>
+</div></section>
+
+<section id="studio"><div class="wrap">
+  <span class="eyebrow reveal">Weave Studio</span>
+  <h2 class="reveal">Design your own cloth.</h2>
+  <p class="lead reveal">Choose a weave structure and a colourway. The loom renders your fabric in real time, down to the interlacing of warp and weft, with a draped preview as a layered mask.</p>
+  <div class="viz reveal" style="margin-top:44px">
+    <div>
+      <div class="viz-stage">
+        <svg id="loom" viewBox="0 0 400 300" role="img" aria-label="Live woven fabric preview"></svg>
+        <div class="viz-drape"><svg id="drape" viewBox="0 0 120 150" aria-hidden="true"></svg><span class="lbl">Draped</span></div>
+      </div>
+      <div class="spec">
+        <div><b id="specCount">—</b><span>Threads / inch</span></div>
+        <div><b id="specWeight">—</b><span>Weight (gsm)</span></div>
+        <div><b id="specFibre">—</b><span>Primary fibre</span></div>
+        <div><b id="specHand">—</b><span>Hand / drape</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="ctrl">
+        <h3>Weave structure</h3>
+        <div class="opts" id="weaveOpts" role="group" aria-label="Weave structure"></div>
+      </div>
+      <div class="ctrl">
+        <h3>Colourway</h3>
+        <div class="opts" id="colorOpts" role="group" aria-label="Colourway"></div>
+      </div>
+      <div class="ctrl">
+        <h3>Thread weight</h3>
+        <div class="opts" id="weightOpts" role="group" aria-label="Thread weight"></div>
+      </div>
+      <p style="margin-top:28px"><a class="btn primary" href="#swatch" data-ico="mail">Order this as a swatch</a></p>
+      <p class="muted" style="font-size:13.5px;margin-top:12px">Rendered live. Final woven cloth is matched by hand to within one dye lot.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="craft" class="alt"><div class="wrap">
+  <span class="eyebrow reveal">The Craft</span>
+  <h2 class="reveal">From fibre to folded bolt.</h2>
+  <p class="lead reveal">Four stages, roughly six weeks. Every bolt is traceable to its spinner, dyer and weaver.</p>
+  <div class="track reveal" id="track"><span class="fillbar"></span></div>
+</div></section>
+
+<section id="voices"><div class="wrap">
+  <div class="quote reveal">
+    <svg class="ico ico-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.76-2.02-2-2H4c-1.25 0-2 .75-2 1.97V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .01-1 1.03V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.76-2.02-2-2h-4c-1.25 0-2 .75-2 1.97V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+    <p>They sent a swatchbook you could almost hear. We have specified Ich cloth on every atelier project since.</p>
+    <cite>Interiors studio, Copenhagen</cite>
+  </div>
+</div></section>
+
+<section id="swatch" class="alt"><div class="wrap">
+  <div class="band reveal">
+    <span class="eyebrow" style="justify-content:center">Swatchbook</span>
+    <h2>Hold the cloth in your hands.</h2>
+    <p class="lead" style="margin:10px auto 0;max-width:52ch">We press a swatchbook of your shortlisted weaves by hand and send it worldwide. Leave an email and we will confirm your selection.</p>
+    <form class="field" id="swatchForm" novalidate>
+      <input type="email" id="swatchEmail" placeholder="you@studio.com" aria-label="Email address" required>
+      <button class="btn primary" type="submit" data-ico="arrow-right">Request swatchbook</button>
+    </form>
+    <p class="note" id="swatchNote" role="status" aria-live="polite"></p>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="fcols">
+    <div>
+      <a class="brand" href="#top" style="margin-bottom:14px"><span class="brandmark"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M3 10h18M3 14h18M3 18h18"/><path d="M7 4v16M12 4v16M17 4v16" opacity=".55"/></svg></span><b>Ich Textilles</b></a>
+      <p class="muted" style="font-size:14.5px;max-width:34ch">Heirloom-grade woven cloth, made to order on heritage looms.</p>
+    </div>
+    <div><h4>Explore</h4><a href="#collections">Collections</a><a href="#studio">Weave Studio</a><a href="#craft">The Craft</a><a href="#swatch">Swatchbook</a></div>
+    <div><h4>Contact</h4><a href="#swatch">Request a swatchbook</a><a href="#top">Trade enquiries</a><a href="#top">Visit the mill</a></div>
+  </div>
+  <div class="fbottom"><span>Ich Textilles — demonstration landing page</span><span>Design: premium woven system</span></div>
+</div></footer>
+
+<script>
+(() => {
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = (s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const ICONS={
+    award:'<circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/>',
+    leaf:'<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
+    layers:'<path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/>',
+    activity:'<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>',
+    droplet:'<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/>',
+    globe:'<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"/>',
+    eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>',
+    mail:'<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>',
+    'arrow-right':'<path d="M5 12h14M13 5l7 7-7 7"/>',
+    spool:'<rect x="6" y="3" width="12" height="18" rx="2"/><path d="M6 7h12M6 17h12M10 7v10M14 7v10"/>',
+    palette:'<circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2a10 10 0 1 0 0 20 2.5 2.5 0 0 0 0-5h-1.5a2.5 2.5 0 0 1 0-5H14a6 6 0 0 0-2-10Z"/>',
+    scissors:'<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/>',
+    package:'<path d="m7.5 4.27 9 5.15M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/>'
+  };
+  const ico=(n,cls='ico')=>`<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICONS[n]||''}</svg>`;
+  // inject placeholder icons + data-ico
+  $$('i[data-icon]').forEach(el=>{el.outerHTML=ico(el.dataset.icon);});
+  $$('[data-ico]').forEach(el=>el.insertAdjacentHTML('afterbegin',ico(el.dataset.ico,'ico ico-sm')));
+
+  const onView=(el,fn)=>{ if(RM||!('IntersectionObserver'in window))return fn();
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io.disconnect();fn();}}),{threshold:.3}); io.observe(el); };
+  const countUp=(el,to,suf='')=>{ const isInt=Number.isInteger(to);
+    const fmt=v=>(isInt?Math.round(v).toLocaleString('en-GB'):v.toFixed(0))+suf;
+    if(RM){el.textContent=fmt(to);return;}
+    const t0=performance.now(),dur=1300;
+    const step=t=>{const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=fmt(to*e);if(p<1)requestAnimationFrame(step);};
+    requestAnimationFrame(step); };
+  $$('[data-to]').forEach(b=>onView(b,()=>countUp(b,+b.dataset.to,b.dataset.suf||'')));
+
+  // ---- palette / data ----
+  const COLORS={
+    indigo:{name:'Deep Indigo',warp:'#2a3a63',weft:'#3d5088',hl:'#5e74b8'},
+    clay:{name:'Burnt Clay',warp:'#7a3b28',weft:'#9c5338',hl:'#c47a54'},
+    sage:{name:'Dried Sage',warp:'#4a5944',weft:'#64755c',hl:'#8ca181'},
+    oat:{name:'Raw Oat',warp:'#8a7c5f',weft:'#a89878',hl:'#cbbd9c'},
+    ink:{name:'Char Ink',warp:'#26282f',weft:'#3a3d47',hl:'#5a5e6b'}
+  };
+  const WEAVES={
+    plain:{name:'Plain',fn:(x,y)=>(x+y)%2===0,count:'96',gsm:'180',hand:'Crisp'},
+    twill:{name:'Twill',fn:(x,y)=>((x+y)%4)<2,count:'120',gsm:'240',hand:'Supple'},
+    satin:{name:'Satin',fn:(x,y)=>((x*3+y)%5)===0,count:'180',gsm:'140',hand:'Fluid'},
+    herringbone:{name:'Herringbone',fn:(x,y)=>{const b=Math.floor(y/4)%2?(x-y):(x+y);return (((b%4)+4)%4)<2;},count:'132',gsm:'260',hand:'Structured'}
+  };
+  const FIBRES={indigo:'Belgian linen',clay:'Tussar silk',sage:'Merino wool',oat:'Egyptian cotton',ink:'Alpaca blend'};
+  const WEIGHTS={fine:{name:'Fine',mul:1.35},standard:{name:'Standard',mul:1},heavy:{name:'Heavy',mul:.72}};
+  let state={weave:'twill',color:'indigo',weight:'standard'};
+
+  // ---- woven cloth renderer: shaded warp columns + merged, rounded weft floats ----
+  function shade(hex,amt){const n=parseInt(hex.slice(1),16),f=amt/100*255;return '#'+[(n>>16)&255,(n>>8)&255,n&255].map(v=>Math.round(Math.max(0,Math.min(255,v+f))).toString(16).padStart(2,'0')).join('');}
+  function weaveCells(c,w,cols,rows,cell,p,x0=0,y0=0){
+    const f=v=>(+v).toFixed(2);
+    let s=`<defs><linearGradient id="${p}wp" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${shade(c.warp,-14)}"/><stop offset=".5" stop-color="${shade(c.warp,7)}"/><stop offset="1" stop-color="${shade(c.warp,-18)}"/></linearGradient><linearGradient id="${p}wf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c.hl}"/><stop offset=".5" stop-color="${c.weft}"/><stop offset="1" stop-color="${shade(c.weft,-16)}"/></linearGradient></defs>`;
+    s+=`<rect x="${x0}" y="${y0}" width="${f(cols*cell)}" height="${f(rows*cell)}" fill="${shade(c.warp,-28)}"/>`;
+    for(let x=0;x<cols;x++)s+=`<rect x="${f(x0+x*cell+cell*.07)}" y="${y0}" width="${f(cell*.86)}" height="${f(rows*cell)}" rx="${f(cell*.3)}" fill="url(#${p}wp)"/>`;
+    for(let y=0;y<rows;y++){let x=0;while(x<cols){if(w.fn(x,y)){let e=x;while(e<cols&&w.fn(e,y))e++;
+      s+=`<rect x="${f(x0+x*cell+cell*.05)}" y="${f(y0+y*cell+cell*.1)}" width="${f((e-x)*cell-cell*.1)}" height="${f(cell*.8)}" rx="${f(cell*.38)}" fill="url(#${p}wf)"/>`;x=e;}else x++;}}
+    return s;
+  }
+  function renderLoom(){
+    const c=COLORS[state.color],w=WEAVES[state.weave],mul=WEIGHTS[state.weight].mul;
+    const N=Math.round(26*mul),cell=400/N,rows=Math.ceil(300/cell);
+    $('#loom').innerHTML=weaveCells(c,w,N,rows,cell,'lm')+`<defs><linearGradient id="lmsheen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".12"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".28"/></linearGradient></defs><rect width="400" height="300" fill="url(#lmsheen)"/>`;
+    renderDrape(c,w);
+    $('#specCount').textContent=Math.round(+w.count*mul);
+    $('#specWeight').textContent=Math.round(+w.gsm*mul);
+    $('#specFibre').textContent=FIBRES[state.color];
+    $('#specHand').textContent=w.hand;
+  }
+  // draped preview: the same weave masked into a hanging-cloth silhouette with fold shading
+  function renderDrape(c,w){
+    const cloth='M10 12 H110 C113 58 103 104 116 146 Q100 141 88 146 Q74 140 60 146 Q46 140 32 146 Q20 141 4 146 C17 104 7 58 10 12 Z';
+    let s=`<defs><clipPath id="dpc"><path d="${cloth}"/></clipPath><linearGradient id="dpf" x1="0" y1="0" x2="1" y2="0">`;
+    [[0,.45],[.12,0],[.24,.4],[.38,0],[.5,.36],[.62,0],[.76,.4],[.88,0],[1,.45]].forEach(([o,a])=>{s+=`<stop offset="${o}" stop-color="#000" stop-opacity="${a}"/>`;});
+    s+=`</linearGradient><linearGradient id="dpl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset="1" stop-color="#000" stop-opacity=".32"/></linearGradient></defs>`;
+    s+=`<rect width="120" height="150" fill="#0d0f16"/><g clip-path="url(#dpc)">${weaveCells(c,w,30,38,4,'dp')}<rect width="120" height="150" fill="url(#dpf)"/><rect width="120" height="150" fill="url(#dpl)"/></g><rect x="4" y="7" width="112" height="5" rx="2.5" fill="#cfa86a"/>`;
+    $('#drape').innerHTML=s;
+  }
+
+  // controls
+  const build=(host,obj,key,render=(k,v)=>v.name)=>{
+    $(host).innerHTML=Object.entries(obj).map(([k,v])=>{
+      const chip = host==='#colorOpts'?`<span class="swatchchip" style="background:${v.weft}"></span>`:'';
+      return `<button class="opt" type="button" data-k="${k}" aria-pressed="${state[key]===k}">${chip}${esc(render(k,v))}</button>`;
+    }).join('');
+    $(host).addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;state[key]=b.dataset.k;
+      $$('.opt',$(host)).forEach(o=>o.setAttribute('aria-pressed',o.dataset.k===state[key]));renderLoom();});
+  };
+  build('#weaveOpts',WEAVES,'weave');
+  build('#colorOpts',COLORS,'color');
+  build('#weightOpts',WEIGHTS,'weight');
+  renderLoom();
+
+  // ---- collection cards (live swatches) ----
+  const COLL=[
+    {name:'Lineage',desc:'Belgian linen, plain weave',color:'oat',weave:'plain',tags:['Linen','Interiors']},
+    {name:'Nocturne',desc:'Tussar silk, satin weave',color:'indigo',weave:'satin',tags:['Silk','Eveningwear']},
+    {name:'Terra',desc:'Merino wool, twill',color:'clay',weave:'twill',tags:['Wool','Tailoring']},
+    {name:'Meridian',desc:'Alpaca blend, herringbone',color:'ink',weave:'herringbone',tags:['Alpaca','Outerwear']}
+  ];
+  const swatchSVG=(color,weave,i)=>`<svg class="sw" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${weaveCells(COLORS[color],WEAVES[weave],16,16,6.25,'cs'+i)}</svg>`;
+  $('#collGrid').innerHTML=COLL.map((c,i)=>`<article class="coll reveal" style="transition-delay:${i*70}ms">${swatchSVG(c.color,c.weave,i)}
+    <h3>${esc(c.name)}</h3><p>${esc(c.desc)}</p><div class="tagrow">${c.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div></article>`).join('');
+
+  // ---- craft track ----
+  const STEPS=[
+    {ic:'spool',t:'Spin',d:'Natural fibre spun to count in small lots.',on:true},
+    {ic:'palette',t:'Dye',d:'Plant and mineral dyes, closed-loop water.',on:true},
+    {ic:'layers',t:'Weave',d:'Warp dressed, woven on heritage looms.',on:true},
+    {ic:'package',t:'Finish',d:'Washed, pressed, folded and signed.',on:false}
+  ];
+  const doneN=STEPS.filter(s=>s.on).length;
+  $('#track').insertAdjacentHTML('beforeend',STEPS.map((s,i)=>`<div class="step reveal" style="transition-delay:${i*90}ms"><span class="node ${s.on?'on':''}">${ico(s.ic)}</span><h3>${esc(s.t)}</h3><p>${esc(s.d)}</p></div>`).join(''));
+  onView($('#track'),()=>{$('#track .fillbar').style.width=`calc((100% + 22px) * ${doneN-1} / ${STEPS.length})`;});
+
+  // ---- swatch form ----
+  $('#swatchForm').addEventListener('submit',e=>{
+    e.preventDefault();const v=$('#swatchEmail').value.trim();const ok=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
+    $('#swatchNote').textContent=ok?'Thank you. We will confirm your swatchbook selection by email.':'Please enter a valid email address.';
+    $('#swatchNote').style.color=ok?'var(--accent-2)':'var(--bad,#e5736b)';
+    if(ok)$('#swatchForm').reset();
+  });
+
+  // ---- hero: animated loom rig (shuttle + beater weave the cloth live, colourway cycles) ----
+  (()=>{
+    const host=$('#heroLoom'); if(!host) return;
+    const SEQ=[['indigo','twill'],['clay','herringbone'],['sage','satin'],['oat','plain'],['ink','twill']];
+    const COLS=22,CELL=16,X0=44,Y0=46,ROWS=19;
+    let k=0,row=0,prog=0,hold=0,last=0,c,w;
+    host.innerHTML=`<rect width="440" height="400" fill="#0e1018"/><g id="hwarp"></g><g id="hcloth"></g><rect id="hbeat" x="30" width="380" height="5" rx="2.5" fill="#cfa86a" opacity=".75"/><line id="hpick" stroke-width="3" stroke-linecap="round"/><g id="hshut"><path d="M-28 0 Q-15 -8 0 -8 Q15 -8 28 0 Q15 8 0 8 Q-15 8 -28 0Z" fill="#cfa86a"/><path d="M-14 0 H14" stroke="#14120c" stroke-width="2" stroke-linecap="round"/></g><rect x="24" y="22" width="392" height="12" rx="6" fill="#2a2a33"/><rect x="24" y="380" width="392" height="12" rx="6" fill="#2a2a33"/>`;
+    const q=id=>host.querySelector(id);
+    const setCloth=()=>{c=COLORS[SEQ[k][0]];w=WEAVES[SEQ[k][1]];
+      let s='';for(let x=0;x<COLS;x++)s+=`<line x1="${X0+x*CELL+CELL/2}" y1="${Y0}" x2="${X0+x*CELL+CELL/2}" y2="380" stroke="${c.warp}" stroke-width="${CELL*.55}" opacity=".9"/>`;
+      q('#hwarp').innerHTML=s;q('#hcloth').innerHTML='';q('#hpick').setAttribute('stroke',c.hl);
+      $('#heroCap').textContent=`Live loom · ${c.name} ${w.name}`;};
+    const drawCloth=()=>{q('#hcloth').innerHTML=row?weaveCells(c,w,COLS,row,CELL,'hl',X0,Y0):'';};
+    const place=beat=>{const fell=Y0+row*CELL,dir=row%2?-1:1,span=COLS*CELL+56;
+      const sx=dir>0?X0-28+prog*span:X0+COLS*CELL+28-prog*span,sy=fell+CELL/2;
+      q('#hshut').setAttribute('transform',`translate(${sx.toFixed(1)} ${sy})`);
+      const ex=dir>0?X0-28:X0+COLS*CELL+28,pk=q('#hpick');pk.setAttribute('x1',ex);pk.setAttribute('x2',sx.toFixed(1));pk.setAttribute('y1',sy);pk.setAttribute('y2',sy);
+      q('#hbeat').setAttribute('y',(fell+CELL+4+beat*14).toFixed(1));};
+    setCloth();
+    if(RM){row=ROWS;drawCloth();place(0);q('#hshut').style.display='none';q('#hpick').style.display='none';return;}
+    const tick=t=>{const dt=Math.min(64,t-(last||t));last=t;
+      if(!document.hidden){
+        if(hold>0){hold-=dt;if(hold<=0){k=(k+1)%SEQ.length;row=0;prog=0;setCloth();}}
+        else{prog+=dt/420;if(prog>=1){prog=0;row++;drawCloth();if(row>=ROWS)hold=1800;}}
+        place(row>0?Math.max(0,1-prog*3):0);
+      }
+      requestAnimationFrame(tick);};
+    requestAnimationFrame(tick);
+  })();
+
+  // ---- reveal + scroll spy ----
+  if(RM||!('IntersectionObserver'in window))$$('.reveal').forEach(el=>el.classList.add('in'));
+  else{const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});$$('.reveal').forEach(el=>io.observe(el));}
+  const links=$$('.navlinks a'),secs=links.map(a=>$(a.getAttribute('href'))).filter(Boolean);
+  const spy=()=>{const y=scrollY+140;let cur=secs[0];secs.forEach(s=>{if(s&&s.offsetTop<=y)cur=s;});links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+(cur&&cur.id)));};
+  addEventListener('scroll',spy,{passive:true});spy();
+
+  // ---- hero weave canvas ----
+  const cv=$('#weave'),cx=cv.getContext('2d');let W,H,raf,t=0;
+  const size=()=>{const r=Math.min(2,devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*r;cv.height=H*r;cx.setTransform(r,0,0,r,0,0);};
+  const draw=()=>{
+    cx.clearRect(0,0,W,H);
+    const gap=46, amp=7;
+    cx.lineWidth=1.1;
+    // warp (vertical) subtle
+    for(let x=0;x<=W;x+=gap){
+      cx.beginPath();cx.strokeStyle='rgba(207,168,106,.2)';
+      for(let y=0;y<=H;y+=6){cx.lineTo(x+Math.sin((y+t)/60)*amp,y);}cx.stroke();
+    }
+    // weft (horizontal) brighter, flowing
+    for(let y=0;y<=H;y+=gap){
+      cx.beginPath();cx.strokeStyle=`rgba(227,196,140,${0.16+0.06*Math.sin((y+t)/120)})`;
+      for(let x=0;x<=W;x+=6){cx.lineTo(x,y+Math.sin((x-t)/70)*amp);}cx.stroke();
+    }
+    if(!RM&&!document.hidden){t+=0.6;raf=requestAnimationFrame(draw);}
+  };
+  size();draw();if(RM)draw();
+  addEventListener('resize',()=>{size();if(RM)draw();});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!RM){cancelAnimationFrame(raf);draw();}});
+})();
+</script>
+
+<script>
+(()=>{const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+ if(RM||!fine)return;
+ const h=document.querySelector('.hero');if(h){const m=document.createElement('div');m.className='masklayer';m.setAttribute('aria-hidden','true');h.insertBefore(m,h.querySelector('.wrap'));
+  h.addEventListener('pointermove',e=>{const r=h.getBoundingClientRect();m.style.setProperty('--mx',(e.clientX-r.left)+'px');m.style.setProperty('--my',(e.clientY-r.top)+'px');});}
+ document.querySelectorAll('.card,.coll,.piece,.proj').forEach(c=>{c.classList.add('tilt');
+  c.addEventListener('pointerenter',()=>{c.style.transitionDelay='0s';c.style.transition='transform .18s var(--ease),box-shadow .4s';});c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(900px) rotateX(${(-y*5).toFixed(2)}deg) rotateY(${(x*5).toFixed(2)}deg) translateY(-3px)`;});
+  c.addEventListener('pointerleave',()=>{c.style.transform='';});});
+})();
+</script>
+</body>
+</html>

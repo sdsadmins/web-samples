@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Furneco — Furniture, Configured to You</title>
+<meta name="description" content="Furneco designs made-to-order furniture in solid timber and natural upholstery. Configure your piece, preview it in daylight or dusk, and reserve it.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  --bg:#17130f; --surface:#1f1a14; --surface-2:#271f18; --ink:#f5efe6; --ink-2:#ded3c4; --muted:#a3998a; --line:rgba(255,255,255,.08);
+  --accent:#d98b55; --accent-2:#eba878; --accent-ink:#1a110a; --accent-soft:rgba(217,139,85,.14);
+  --radius:20px; --ease:cubic-bezier(.2,.8,.2,1);
+  --shadow-1:0 1px 2px rgba(0,0,0,.32),0 20px 48px -22px rgba(0,0,0,.72);
+  --display:'Fraunces',Georgia,serif; --sans:'Sora',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --max:1200px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+section{padding:120px 0;position:relative}
+section.alt{background:var(--surface)}
+.eyebrow{display:inline-flex;gap:9px;align-items:center;font:700 12.5px/1.5 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.eyebrow::before{content:"";width:26px;height:1px;background:linear-gradient(90deg,var(--accent),transparent)}
+h1,h2,h3{margin:0;line-height:1.08;letter-spacing:-.01em}
+h1{font:600 clamp(44px,6.6vw,86px)/1.01 var(--display)}
+h2{font:600 clamp(33px,4.2vw,56px)/1.06 var(--display);margin:16px 0 16px}
+h3{font:700 19px/1.3 var(--sans)}
+.lead{font-size:clamp(17px,1.5vw,20px);color:var(--ink-2);max-width:60ch}
+.muted{color:var(--muted)}
+.ico{width:20px;height:20px;color:var(--accent);flex:none;vertical-align:-4px}
+.ico-sm{width:16px;height:16px}.ico-lg{width:30px;height:30px}
+.chipico{display:grid;place-items:center;width:52px;height:52px;border-radius:15px;background:var(--accent-soft);color:var(--accent);border:1px solid var(--line)}
+.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:18px;height:72px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800}
+.brand b{font:600 22px var(--display);letter-spacing:.01em}
+.brandmark{width:34px;height:34px;border-radius:9px;background:linear-gradient(140deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:var(--accent-ink)}
+.navlinks{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+.navlinks::-webkit-scrollbar{display:none}
+.navlinks a{padding:9px 14px;border-radius:999px;font-size:14px;font-weight:600;color:var(--muted);white-space:nowrap;transition:color .25s,background .25s}
+.navlinks a:hover{color:var(--ink)} .navlinks a.active{color:var(--accent)}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border-radius:999px;font:700 15px var(--sans);border:1px solid var(--line);background:var(--surface-2);color:var(--ink);cursor:pointer;transition:transform .25s var(--ease),box-shadow .25s,background .25s}
+.btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-1)}
+.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--accent-ink);border-color:transparent}
+.btn.primary .ico{color:var(--accent-ink)}
+.btn.ghost{background:transparent}
+.hero{position:relative;min-height:clamp(620px,88vh,900px);display:flex;align-items:center;padding:110px 0 80px;overflow:hidden}
+#grid{position:absolute;inset:0;width:100%;height:100%;opacity:.6;pointer-events:none}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 20% 20%,transparent,var(--bg) 74%);pointer-events:none}
+.hero .wrap{position:relative;z-index:2;max-width:1000px}
+.hero h1{max-width:15ch}
+.hero .lead{margin-top:22px}
+.cta-row{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+.hero-meta{margin-top:54px;display:flex;gap:40px;flex-wrap:wrap}
+.hero-meta div b{display:block;font:600 40px/1 var(--display);color:var(--accent-2)}
+.hero-meta div span{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.marquee{border-block:1px solid var(--line);background:var(--surface);overflow:hidden;padding:20px 0}
+.mtrack{display:flex;gap:56px;width:max-content;animation:scrollx 48s linear infinite}
+.marquee:hover .mtrack,.marquee:focus-within .mtrack{animation-play-state:paused}
+.mtrack span{font:600 17px var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);display:inline-flex;align-items:center;gap:56px}
+.mtrack span::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+@keyframes scrollx{to{transform:translateX(-50%)}}
+.js .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
+.grid{display:grid;gap:24px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow-1)}
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.kpi b{display:block;font:600 52px/1 var(--display);color:var(--ink);margin:14px 0 6px}
+.kpi small{display:block;color:var(--muted);font-size:13px}
+/* catalogue cards */
+.piece{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:linear-gradient(160deg,var(--surface-2),var(--surface));padding:26px;transition:transform .4s var(--ease),box-shadow .4s}
+.piece:hover{transform:translateY(-4px);box-shadow:var(--shadow-1)}
+.piece .thumb{aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:radial-gradient(120% 120% at 50% 20%,var(--surface-2),var(--bg));display:grid;place-items:center;margin-bottom:18px}
+.piece .thumb svg{width:82%;height:auto}
+.piece h3{font:600 23px var(--display)}
+.piece p{margin:4px 0 0;color:var(--muted);font-size:14.5px}
+.piece .price{margin-top:12px;font:700 13px var(--sans);letter-spacing:.06em;color:var(--accent-2)}
+/* configurator */
+.cfg{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:start}
+.stage{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-1);background:#20150d}
+.stage svg{width:100%;height:auto;display:block}
+.stagebadge{position:absolute;top:14px;left:14px;display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:color-mix(in srgb,var(--bg) 60%,transparent);backdrop-filter:blur(8px);border:1px solid var(--line);font:700 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.ctrl+.ctrl{margin-top:24px}
+.ctrl h3{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.opts{display:flex;gap:10px;flex-wrap:wrap}
+.opt{min-height:44px;padding:0 15px;border-radius:12px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink-2);font:600 14px var(--sans);cursor:pointer;transition:all .25s var(--ease);display:inline-flex;align-items:center;gap:9px}
+.opt:hover{color:var(--ink);border-color:var(--accent)}
+.opt[aria-pressed="true"]{border-color:var(--accent);color:var(--ink);background:var(--accent-soft)}
+.swatchchip{width:20px;height:20px;border-radius:6px;border:1px solid rgba(255,255,255,.28)}
+.spec{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px}
+.spec div{padding:15px 17px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line)}
+.spec b{display:block;font:600 22px var(--display);color:var(--accent-2)}
+.spec span{font-size:12px;color:var(--muted);letter-spacing:.04em}
+.summary{margin-top:22px;padding:18px 20px;border-radius:16px;background:var(--surface-2);border:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.summary b{font:600 20px var(--display);color:var(--ink)}
+/* track */
+.track{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:40px}
+.track:before{content:"";position:absolute;left:28px;right:28px;top:27px;height:2px;background:var(--line)}
+.track .fillbar{position:absolute;left:28px;top:27px;height:2px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width 1.6s var(--ease)}
+.node{position:relative;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:2px solid var(--line);color:var(--muted);z-index:1}
+.node.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.step h3{margin-top:18px}.step p{margin:6px 0 0;color:var(--muted);font-size:14.5px}
+/* quote */
+.quote{max-width:900px;margin:0 auto;text-align:center}
+.quote p{font:500 clamp(24px,3.2vw,40px)/1.3 var(--display)}
+.quote .ico-lg{color:var(--accent);opacity:.7}
+.quote cite{display:block;margin-top:24px;font-style:normal;color:var(--muted);letter-spacing:.06em;font-size:14px;text-transform:uppercase}
+.band{background:linear-gradient(135deg,var(--surface-2),var(--surface));border:1px solid var(--line);border-radius:28px;padding:56px;text-align:center;position:relative;overflow:hidden}
+.band::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 120% at 50% -20%,var(--accent-soft),transparent);pointer-events:none}
+.band>*{position:relative}
+.field{display:flex;gap:10px;max-width:460px;margin:26px auto 0;flex-wrap:wrap}
+.field input{flex:1;min-width:200px;min-height:50px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:500 15px var(--sans)}
+.field input:focus{outline:2px solid var(--accent);outline-offset:2px}
+.note{margin-top:14px;font-size:13px;color:var(--muted);min-height:18px}
+footer{padding:60px 0 44px;border-top:1px solid var(--line)}
+.fcols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+.fcols a{color:var(--muted);display:block;padding:5px 0;font-size:14.5px;transition:color .2s}
+.fcols a:hover{color:var(--accent)}
+.fcols h4{font:700 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin:0 0 10px}
+.fbottom{margin-top:44px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:13.5px}
+@media (max-width:980px){.split,.cfg{grid-template-columns:1fr}.g3,.g4{grid-template-columns:repeat(2,1fr)}.track{grid-template-columns:repeat(2,1fr)}.track:before,.track .fillbar{display:none}.fcols{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){section{padding:72px 0}.wrap{padding:0 16px}.g3,.g4,.fcols{grid-template-columns:1fr}.hero-meta{gap:26px}.band{padding:36px 22px}.spec{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}html{scroll-behavior:auto}.js .reveal{opacity:1;transform:none}}
+
+/* interactive 2D layer mask: a second patterned layer revealed through a cursor-following mask */
+.hero .masklayer{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .5s var(--ease);
+  background:radial-gradient(circle at 50% 50%,var(--accent-soft),transparent 60%),repeating-linear-gradient(45deg,color-mix(in srgb,var(--accent) 40%,transparent) 0 1px,transparent 1px 14px),repeating-linear-gradient(-45deg,color-mix(in srgb,var(--accent-2) 30%,transparent) 0 1px,transparent 1px 14px);
+  -webkit-mask-image:radial-gradient(circle 240px at var(--mx,50%) var(--my,40%),#000 0,rgba(0,0,0,.55) 45%,transparent 72%);
+          mask-image:radial-gradient(circle 240px at var(--mx,50%) var(--my,40%),#000 0,rgba(0,0,0,.55) 45%,transparent 72%)}
+.hero:hover .masklayer{opacity:1}
+.tilt{transform-style:preserve-3d;will-change:transform}
+@media (hover:none),(prefers-reduced-motion:reduce){.hero .masklayer{display:none}}
+
+.split>*{min-width:0}
+.brand{flex:none}.brand b{white-space:nowrap}
+.brandmark .ico{color:var(--accent-ink)}
+.fcols a.brand{display:flex;align-items:center}
+.swatchchip{box-shadow:0 0 0 1px rgba(255,255,255,.35)}
+.track:before{right:auto;width:calc((100% + 22px)*3/4)}
+.hero .wrap{max-width:var(--max);display:grid;grid-template-columns:1.08fr .92fr;gap:56px;align-items:center}
+.hero-visual{position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-1),0 0 0 1px color-mix(in srgb,var(--accent) 14%,transparent),0 40px 90px -40px color-mix(in srgb,var(--accent) 40%,transparent);background:var(--surface)}
+.hero-visual svg{position:relative;display:block;width:100%;height:auto}
+.hero-visual .cap{position:absolute;left:14px;bottom:14px;display:inline-flex;align-items:center;gap:9px;padding:8px 13px;border-radius:999px;background:color-mix(in srgb,var(--bg) 62%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);font:700 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink);max-width:calc(100% - 28px)}
+.hero-visual .cap i{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none;animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 60%,transparent)}100%{box-shadow:0 0 0 10px transparent}}
+@media (max-width:980px){.hero .wrap{grid-template-columns:1fr;gap:44px}.hero{min-height:0}}
+@media (max-width:620px){
+ .navlinks{-webkit-mask-image:linear-gradient(90deg,#000 78%,transparent);mask-image:linear-gradient(90deg,#000 78%,transparent)}
+ .hero-meta{display:grid;grid-template-columns:repeat(3,auto);gap:18px;justify-content:start}.hero-meta div b{font-size:30px}.hero-meta div span{font-size:10.5px}
+ .g4{grid-template-columns:1fr 1fr;gap:14px}
+ .coll,.proj{aspect-ratio:3/4;padding:14px}.coll h3,.proj h3{font-size:18px}.coll p,.proj p{font-size:12px}.coll .tagrow,.proj .tag{display:none}
+ .piece{padding:14px}.piece h3{font-size:18px}.piece p{font-size:12.5px}.piece .thumb{margin-bottom:12px}
+}
+@media (max-width:520px){.g2{grid-template-columns:1fr}}
+#hc0,#hc1{transition:opacity 1s var(--ease)}#hc1{position:absolute!important;inset:0;height:100%!important}
+
+@media (max-width:620px){.spec{grid-template-columns:1fr 1fr!important;gap:10px}.spec div{padding:12px 14px}.spec b{font-size:19px}}
+@media (max-width:520px){.g2:has(> .kpi){grid-template-columns:1fr 1fr;gap:12px}.card.kpi{padding:16px}.kpi b{font-size:34px;margin:10px 0 4px}.kpi .chipico{width:40px;height:40px;border-radius:12px}.kpi strong{font-size:14px;line-height:1.3;display:block}}
+</style>
+</head>
+<body id="top">
+
+<nav class="nav" aria-label="Primary"><div class="wrap">
+  <a class="brand" href="#top" aria-label="Furneco home">
+    <span class="brandmark"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4M3 11h18v5H3zM6 16v3M18 16v3"/></svg></span>
+    <b>Furneco</b>
+  </a>
+  <div class="navlinks">
+    <a href="#top">Home</a><a href="#studio">Workshop</a><a href="#catalogue">Catalogue</a><a href="#configurator">Configure</a><a href="#process">Process</a><a href="#reserve">Reserve</a>
+  </div>
+</div></nav>
+
+<header class="hero">
+  <canvas id="grid" aria-hidden="true"></canvas>
+  <div class="wrap"><div class="hero-copy">
+    <span class="eyebrow reveal">Made to order · Solid timber</span>
+    <h1 class="reveal">Furniture built once, and built for you.</h1>
+    <p class="lead reveal">Furneco joins solid timber and natural upholstery into pieces that outlast trends. Configure yours in the studio, preview it from daylight to dusk, and reserve the exact piece you designed.</p>
+    <div class="cta-row reveal">
+      <a class="btn primary" href="#configurator" data-ico="settings">Configure a piece</a>
+      <a class="btn ghost" href="#catalogue" data-ico="eye">Browse catalogue</a>
+    </div>
+    <div class="hero-meta reveal">
+      <div><b data-to="30" data-suf="yr">30yr</b><span>Frame warranty</span></div>
+      <div><b data-to="60" data-suf="+">60+</b><span>Finishes &amp; fabrics</span></div>
+      <div><b data-to="100" data-suf="%">100%</b><span>FSC timber</span></div>
+    </div>
+  </div>
+  <div class="hero-visual reveal"><svg id="hc0" viewBox="0 0 440 340" role="img" aria-label="Armchair rendered in changing finishes and light"></svg><svg id="hc1" viewBox="0 0 440 340" aria-hidden="true"></svg><span class="cap"><i></i><span id="heroCap">Live configurator</span></span></div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true"><div class="mtrack">
+  <span>Solid Walnut<span></span>European Oak<span></span>Hand-Stitched<span></span>Dovetail Joints<span></span>Natural Linen<span></span>Made to Order<span></span></span>
+  <span>Solid Walnut<span></span>European Oak<span></span>Hand-Stitched<span></span>Dovetail Joints<span></span>Natural Linen<span></span>Made to Order<span></span></span>
+</div></div>
+
+<section id="studio"><div class="wrap">
+  <div class="split">
+    <div class="reveal">
+      <span class="eyebrow">The Workshop</span>
+      <h2>Joinery, not assembly.</h2>
+      <p class="lead">Every Furneco piece is cut, joined and finished by a single maker from board to boxing. Mortise-and-tenon frames, hand-tied suspension, and finishes rubbed in by hand, so the piece ages like timber should.</p>
+      <div class="grid g2" style="margin-top:30px">
+        <div class="card" style="padding:20px"><span class="chipico"><i data-icon="hammer"></i></span><h3 style="margin-top:14px">One maker, one piece</h3><p class="muted" style="margin:6px 0 0;font-size:14.5px">Signed by the craftsperson who built it.</p></div>
+        <div class="card" style="padding:20px"><span class="chipico"><i data-icon="leaf"></i></span><h3 style="margin-top:14px">FSC timber</h3><p class="muted" style="margin:6px 0 0;font-size:14.5px">Responsibly sourced hardwood, water-based finish.</p></div>
+      </div>
+    </div>
+    <div class="grid g2 reveal">
+      <div class="card kpi"><span class="chipico"><i data-icon="hammer"></i></span><b data-to="24">24</b><strong>Master makers</strong><small>On the workshop floor</small></div>
+      <div class="card kpi"><span class="chipico"><i data-icon="package"></i></span><b data-to="14">14</b><strong>Day lead time</strong><small>From order to dispatch</small></div>
+      <div class="card kpi"><span class="chipico"><i data-icon="award"></i></span><b data-to="30" data-suf="yr">30yr</b><strong>Frame warranty</strong><small>Structural guarantee</small></div>
+      <div class="card kpi"><span class="chipico"><i data-icon="users"></i></span><b data-to="9400" data-suf="+">9400</b><strong>Homes furnished</strong><small>Across the country</small></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="catalogue" class="alt"><div class="wrap">
+  <span class="eyebrow reveal">Catalogue</span>
+  <h2 class="reveal">Signature silhouettes.</h2>
+  <p class="lead reveal">Four forms we return to, each configurable to your room. Every thumbnail is drawn live in the same engine as the configurator.</p>
+  <div class="grid g4" id="catGrid" style="margin-top:40px"></div>
+</div></section>
+
+<section id="configurator"><div class="wrap">
+  <span class="eyebrow reveal">Configurator</span>
+  <h2 class="reveal">Design your armchair.</h2>
+  <p class="lead reveal">Choose the timber, the upholstery and the light. The piece renders in real time, and the room light acts as a 2D layer mask so you can preview it from daylight to dusk.</p>
+  <div class="cfg reveal" style="margin-top:44px">
+    <div>
+      <div class="stage">
+        <span class="stagebadge" id="lightBadge">Daylight</span>
+        <svg id="chair" viewBox="0 0 440 340" role="img" aria-label="Live armchair preview"></svg>
+      </div>
+      <div class="spec">
+        <div><b id="specTimber">—</b><span>Timber</span></div>
+        <div><b id="specFabric">—</b><span>Upholstery</span></div>
+        <div><b id="specSeat">46 cm</b><span>Seat height</span></div>
+        <div><b id="specLead">14 days</b><span>Lead time</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="ctrl">
+        <h3><i data-icon="hammer"></i> Timber frame</h3>
+        <div class="opts" id="timberOpts" role="group" aria-label="Timber frame"></div>
+      </div>
+      <div class="ctrl">
+        <h3><i data-icon="palette"></i> Upholstery</h3>
+        <div class="opts" id="fabricOpts" role="group" aria-label="Upholstery"></div>
+      </div>
+      <div class="ctrl">
+        <h3><i data-icon="sun"></i> Room light</h3>
+        <div class="opts" id="lightOpts" role="group" aria-label="Room light"></div>
+      </div>
+      <div class="summary">
+        <div><span class="muted" style="font-size:13px;letter-spacing:.06em;text-transform:uppercase">Your build</span><br><b id="buildName">—</b></div>
+        <a class="btn primary" href="#reserve" data-ico="arrow-right">Reserve this build</a>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="process" class="alt"><div class="wrap">
+  <span class="eyebrow reveal">The Process</span>
+  <h2 class="reveal">From board to your room.</h2>
+  <p class="lead reveal">Four stages, about two weeks. You are kept in the loop at every handover.</p>
+  <div class="track reveal" id="track"><span class="fillbar"></span></div>
+</div></section>
+
+<section id="voices"><div class="wrap">
+  <div class="quote reveal">
+    <svg class="ico ico-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.76-2.02-2-2H4c-1.25 0-2 .75-2 1.97V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .01-1 1.03V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.76-2.02-2-2h-4c-1.25 0-2 .75-2 1.97V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+    <p>I configured the chair at midnight and it arrived exactly as the screen promised, grain and all.</p>
+    <cite>Homeowner, Portland</cite>
+  </div>
+</div></section>
+
+<section id="reserve" class="alt"><div class="wrap">
+  <div class="band reveal">
+    <span class="eyebrow" style="justify-content:center">Reserve</span>
+    <h2>Keep your build for 48 hours.</h2>
+    <p class="lead" style="margin:10px auto 0;max-width:52ch">Leave an email and we will hold your exact configuration, send a timber sample, and confirm the maker assigned to your piece.</p>
+    <form class="field" id="reserveForm" novalidate>
+      <input type="email" id="reserveEmail" placeholder="you@home.com" aria-label="Email address" required>
+      <button class="btn primary" type="submit" data-ico="arrow-right">Reserve my build</button>
+    </form>
+    <p class="note" id="reserveNote" role="status" aria-live="polite"></p>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="fcols">
+    <div>
+      <a class="brand" href="#top" style="margin-bottom:14px"><span class="brandmark"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4M3 11h18v5H3zM6 16v3M18 16v3"/></svg></span><b>Furneco</b></a>
+      <p class="muted" style="font-size:14.5px;max-width:34ch">Made-to-order furniture in solid timber, built by hand.</p>
+    </div>
+    <div><h4>Explore</h4><a href="#catalogue">Catalogue</a><a href="#configurator">Configure</a><a href="#process">Process</a><a href="#reserve">Reserve</a></div>
+    <div><h4>Contact</h4><a href="#reserve">Reserve a build</a><a href="#top">Trade &amp; contract</a><a href="#top">Visit the workshop</a></div>
+  </div>
+  <div class="fbottom"><span>Furneco — demonstration landing page</span><span>Design: configured furniture system</span></div>
+</div></footer>
+
+<script>
+(() => {
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const ICONS={
+    settings:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+    eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>',
+    hammer:'<path d="m15 12-8.5 8.5a2.12 2.12 0 1 1-3-3L12 9"/><path d="M17.64 15 22 10.64M20.91 11.7l-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/>',
+    leaf:'<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
+    package:'<path d="m7.5 4.27 9 5.15M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/>',
+    award:'<circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/>',
+    users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+    palette:'<circle cx="13.5" cy="6.5" r="1"/><circle cx="17.5" cy="10.5" r="1"/><circle cx="8.5" cy="7.5" r="1"/><circle cx="6.5" cy="12.5" r="1"/><path d="M12 2a10 10 0 1 0 0 20 2.5 2.5 0 0 0 0-5h-1.5a2.5 2.5 0 0 1 0-5H14a6 6 0 0 0-2-10Z"/>',
+    sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>',
+    'arrow-right':'<path d="M5 12h14M13 5l7 7-7 7"/>',
+    ruler:'<path d="M21.3 8.7 8.7 21.3a1 1 0 0 1-1.4 0l-4.6-4.6a1 1 0 0 1 0-1.4L15.3 2.7a1 1 0 0 1 1.4 0l4.6 4.6a1 1 0 0 1 0 1.4Z"/><path d="m7.5 10.5 2 2M10.5 7.5l2 2M13.5 4.5l2 2"/>',
+    truck:'<path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M14 9h4l4 4v4a1 1 0 0 1-1 1h-1"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
+    sofa:'<path d="M4 11V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4M3 11h18v5H3zM6 16v3M18 16v3"/>',
+    scissors:'<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/>'
+  };
+  const ico=(n,cls='ico')=>`<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICONS[n]||''}</svg>`;
+  $$('i[data-icon]').forEach(el=>{el.outerHTML=ico(el.dataset.icon);});
+  $$('[data-ico]').forEach(el=>el.insertAdjacentHTML('afterbegin',ico(el.dataset.ico,'ico ico-sm')));
+
+  const onView=(el,fn)=>{ if(RM||!('IntersectionObserver'in window))return fn();
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io.disconnect();fn();}}),{threshold:.3}); io.observe(el); };
+  const countUp=(el,to,suf='')=>{ const fmt=v=>Math.round(v).toLocaleString('en-GB')+suf;
+    if(RM){el.textContent=fmt(to);return;} const t0=performance.now(),dur=1300;
+    const step=t=>{const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=fmt(to*e);if(p<1)requestAnimationFrame(step);};
+    requestAnimationFrame(step); };
+  $$('[data-to]').forEach(b=>onView(b,()=>countUp(b,+b.dataset.to,b.dataset.suf||'')));
+
+  // ---- palettes ----
+  const TIMBER={
+    walnut:{name:'Walnut',wood:'#5a3b26',dark:'#432b1b',light:'#7a533a'},
+    oak:{name:'European Oak',wood:'#b08652',dark:'#8a6740',light:'#cda877'},
+    ebony:{name:'Ebony',wood:'#2b2622',dark:'#1c1916',light:'#423b34'},
+    teak:{name:'Golden Teak',wood:'#9a6a35',dark:'#7a5128',light:'#c08f52'}
+  };
+  const FABRIC={
+    camel:{name:'Camel Wool',base:'#c7995f',sh:'#a97e48',hl:'#ddb888'},
+    forest:{name:'Forest Velvet',base:'#3f5a48',sh:'#2e4435',hl:'#5c7b66'},
+    slate:{name:'Slate Linen',base:'#596575',sh:'#434e5c',hl:'#7a8795'},
+    rust:{name:'Rust Bouclé',base:'#a4553a',sh:'#83402b',hl:'#c6765a'},
+    bone:{name:'Bone Cotton',base:'#cabfa9',sh:'#aaa088',hl:'#e4dcc9'}
+  };
+  const LIGHT={
+    day:{name:'Daylight',wall:'#efe6d6',floor:'#d7c6ab',vig:.12,beam:.55,beamCol:'#fff6e0',dark:0,lamp:0,win:'#fbf7ef'},
+    dusk:{name:'Dusk',wall:'#b39880',floor:'#8a7058',vig:.3,beam:.4,beamCol:'#ffb27a',dark:.32,lamp:.6,win:'#f3b98a'},
+    night:{name:'Night',wall:'#3a3f4e',floor:'#2a2e3a',vig:.5,beam:0,beamCol:'#9fb4ff',dark:.55,lamp:.95,win:'#27324f'}
+  };
+  let st={timber:'walnut',fabric:'camel',light:'day'};
+
+  function chairSVG(S,p){
+    const T=TIMBER[S.timber],F=FABRIC[S.fabric],L=LIGHT[S.light];
+    const wood=(x,y,w,h,rx)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="url(#${p}gr)"/><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="url(#${p}wd)"/>`;
+    return `<defs>
+      <linearGradient id="${p}wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${L.wall}"/><stop offset="1" stop-color="${shade(L.wall,-12)}"/></linearGradient>
+      <linearGradient id="${p}floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${shade(L.floor,6)}"/><stop offset="1" stop-color="${shade(L.floor,-12)}"/></linearGradient>
+      <radialGradient id="${p}vig" cx="50%" cy="42%" r="75%"><stop offset="55%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity="${L.vig}"/></radialGradient>
+      <linearGradient id="${p}fab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${F.hl}"/><stop offset=".5" stop-color="${F.base}"/><stop offset="1" stop-color="${F.sh}"/></linearGradient>
+      <linearGradient id="${p}fabs" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${F.sh}"/><stop offset="1" stop-color="${F.base}"/></linearGradient>
+      <pattern id="${p}gr" width="14" height="44" patternUnits="userSpaceOnUse"><rect width="14" height="44" fill="${T.wood}"/><path d="M2 0C5 11 0 24 3 44M8 0C11 15 6 28 9 44" stroke="${T.dark}" stroke-width="1" fill="none" opacity=".6"/><path d="M12 0C13 13 11 29 12 44" stroke="${T.light}" stroke-width=".8" fill="none" opacity=".45"/></pattern>
+      <linearGradient id="${p}wd" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".32"/></linearGradient>
+      <linearGradient id="${p}beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${L.beamCol}" stop-opacity=".9"/><stop offset="1" stop-color="${L.beamCol}" stop-opacity="0"/></linearGradient>
+      <radialGradient id="${p}lamp" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(72 112) scale(200)"><stop offset="0" stop-color="#ffc98a" stop-opacity=".9"/><stop offset=".45" stop-color="#ff9a52" stop-opacity=".24"/><stop offset="1" stop-color="#ff9a52" stop-opacity="0"/></radialGradient>
+    </defs>
+    <rect width="440" height="214" fill="url(#${p}wall)"/>
+    <rect y="210" width="440" height="130" fill="url(#${p}floor)"/>
+    <rect y="208" width="440" height="3" fill="${shade(L.wall,-26)}"/>
+    <rect x="300" y="36" width="96" height="120" rx="4" fill="${L.win}"/>
+    <path d="M348 36V156M300 96H396" stroke="${shade(L.wall,-24)}" stroke-width="3"/>
+    <rect x="296" y="32" width="104" height="128" rx="6" fill="none" stroke="${shade(L.wall,-18)}" stroke-width="4"/>
+    <path d="M300 156H396L330 340H150Z" fill="url(#${p}beam)" opacity="${L.beam}"/>
+    <ellipse cx="72" cy="262" rx="22" ry="5" fill="#000" opacity=".25"/>
+    <rect x="70" y="120" width="4" height="140" fill="#2a2420"/><rect x="58" y="256" width="28" height="6" rx="3" fill="#2a2420"/>
+    <path d="M50 120H94L84 92H60Z" fill="${S.light==='day'?'#d9cdb8':'#ffd9a8'}"/>
+    <ellipse cx="222" cy="262" rx="124" ry="12" fill="#000" opacity="${(.18+L.dark*.2).toFixed(2)}"/>
+    ${wood(158,196,11,52,4)}${wood(281,196,11,52,4)}
+    ${wood(132,176,184,26,8)}
+    ${wood(120,120,26,86,12)}${wood(302,120,26,86,12)}
+    <rect x="152" y="64" width="144" height="112" rx="22" fill="url(#${p}fab)"/>
+    <rect x="152" y="64" width="144" height="112" rx="22" fill="none" stroke="${shade(F.sh,-8)}" stroke-width="1.5" opacity=".5"/>
+    <path d="M188 98L206 130L224 98L242 130L260 98" stroke="${shade(F.sh,-6)}" stroke-width="1" fill="none" opacity=".35"/>
+    <g fill="${shade(F.sh,-12)}" opacity=".6"><circle cx="188" cy="98" r="2.6"/><circle cx="224" cy="98" r="2.6"/><circle cx="260" cy="98" r="2.6"/><circle cx="206" cy="130" r="2.6"/><circle cx="242" cy="130" r="2.6"/></g>
+    <rect x="140" y="150" width="168" height="40" rx="16" fill="url(#${p}fabs)"/>
+    <rect x="140" y="146" width="168" height="22" rx="11" fill="url(#${p}fab)"/>
+    <rect x="118" y="112" width="30" height="20" rx="10" fill="url(#${p}fab)"/>
+    <rect x="300" y="112" width="30" height="20" rx="10" fill="url(#${p}fab)"/>
+    ${wood(140,196,12,64,5)}${wood(296,196,12,64,5)}
+    <rect width="440" height="340" fill="#0a0d1a" opacity="${L.dark}" style="mix-blend-mode:multiply"/>
+    <rect width="440" height="340" fill="url(#${p}lamp)" opacity="${L.lamp}" style="mix-blend-mode:screen"/>
+    <rect width="440" height="340" fill="url(#${p}vig)"/>`;
+  }
+  function drawChair(){
+    $('#chair').innerHTML=chairSVG(st,'c');
+    const T=TIMBER[st.timber],F=FABRIC[st.fabric],L=LIGHT[st.light];
+    $('#specTimber').textContent=T.name;$('#specFabric').textContent=F.name;
+    $('#buildName').textContent=`${T.name} · ${F.name}`;$('#lightBadge').textContent=L.name;
+  }
+  function shade(hex,amt){ // lighten(+)/darken(-) a hex by amt (0-255-ish percent)
+    const h=hex.replace('#','');const n=parseInt(h,16);
+    let r=(n>>16)&255,g=(n>>8)&255,b=n&255;
+    const f=amt/100*255;
+    r=Math.max(0,Math.min(255,r+f));g=Math.max(0,Math.min(255,g+f));b=Math.max(0,Math.min(255,b+f));
+    return '#'+[r,g,b].map(v=>Math.round(v).toString(16).padStart(2,'0')).join('');
+  }
+
+  const build=(host,obj,key,swatchKey)=>{
+    $(host).innerHTML=Object.entries(obj).map(([k,v])=>{
+      const col = swatchKey? v[swatchKey] : null;
+      const chip = col?`<span class="swatchchip" style="background:${col}"></span>`:'';
+      return `<button class="opt" type="button" data-k="${k}" aria-pressed="${st[key]===k}">${chip}${esc(v.name)}</button>`;
+    }).join('');
+    $(host).addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;st[key]=b.dataset.k;
+      $$('.opt',$(host)).forEach(o=>o.setAttribute('aria-pressed',o.dataset.k===st[key]));drawChair();});
+  };
+  build('#timberOpts',TIMBER,'timber','wood');
+  build('#fabricOpts',FABRIC,'fabric','base');
+  build('#lightOpts',LIGHT,'light');
+  drawChair();
+
+  // ---- catalogue thumbnails (mini chairs/pieces) ----
+  const miniPiece=(type,F,T)=>{
+    const f=FABRIC[F],w=TIMBER[T];
+    if(type==='sofa') return `<svg viewBox="0 0 160 110" aria-hidden="true"><rect x="18" y="86" width="10" height="18" rx="3" fill="${w.dark}"/><rect x="132" y="86" width="10" height="18" rx="3" fill="${w.dark}"/><rect x="12" y="46" width="22" height="50" rx="10" fill="${w.wood}"/><rect x="126" y="46" width="22" height="50" rx="10" fill="${w.wood}"/><rect x="30" y="30" width="100" height="44" rx="14" fill="${f.base}"/><rect x="26" y="62" width="108" height="26" rx="12" fill="${f.sh}"/><rect x="26" y="58" width="108" height="16" rx="8" fill="${f.hl}"/></svg>`;
+    if(type==='chair') return `<svg viewBox="0 0 160 110" aria-hidden="true"><rect x="34" y="46" width="11" height="42" rx="5.5" fill="${w.wood}"/><rect x="115" y="46" width="11" height="42" rx="5.5" fill="${w.wood}"/><rect x="44" y="84" width="8" height="20" rx="3" fill="${w.wood}"/><rect x="108" y="84" width="8" height="20" rx="3" fill="${w.wood}"/><rect x="48" y="26" width="64" height="58" rx="16" fill="${f.base}"/><rect x="48" y="26" width="64" height="58" rx="16" fill="none" stroke="${f.sh}" stroke-width="1.5" opacity=".5"/><rect x="42" y="70" width="76" height="18" rx="8" fill="${f.sh}"/></svg>`;
+    if(type==='table') return `<svg viewBox="0 0 160 110" aria-hidden="true"><rect x="24" y="48" width="112" height="12" rx="4" fill="${w.light}"/><rect x="24" y="48" width="112" height="6" rx="3" fill="${w.wood}"/><rect x="34" y="60" width="9" height="42" rx="3" fill="${w.wood}"/><rect x="117" y="60" width="9" height="42" rx="3" fill="${w.wood}"/><rect x="34" y="70" width="92" height="7" rx="3" fill="${w.dark}"/></svg>`;
+    return `<svg viewBox="0 0 160 110" aria-hidden="true"><rect x="40" y="18" width="80" height="80" rx="8" fill="${w.wood}"/><rect x="48" y="26" width="64" height="30" rx="4" fill="${w.dark}"/><rect x="48" y="60" width="64" height="30" rx="4" fill="${w.light}"/><circle cx="80" cy="41" r="3" fill="${f.base}"/><circle cx="80" cy="75" r="3" fill="${f.base}"/></svg>`;
+  };
+  const CAT=[
+    {type:'chair',name:'Aalto Lounge',desc:'Armchair · solid frame',F:'camel',T:'walnut',from:'Configurable'},
+    {type:'sofa',name:'Meridian Sofa',desc:'Three-seat · hand-tied',F:'forest',T:'oak',from:'Configurable'},
+    {type:'table',name:'Linnea Table',desc:'Dining · live edge',F:'bone',T:'teak',from:'Configurable'},
+    {type:'cab',name:'Oslo Cabinet',desc:'Storage · dovetailed',F:'slate',T:'ebony',from:'Configurable'}
+  ];
+  $('#catGrid').innerHTML=CAT.map((c,i)=>`<article class="piece reveal" style="transition-delay:${i*70}ms"><div class="thumb">${miniPiece(c.type,c.F,c.T)}</div><h3>${esc(c.name)}</h3><p>${esc(c.desc)}</p><div class="price">${esc(c.from)}</div></article>`).join('');
+
+  // ---- process track ----
+  const STEPS=[
+    {ic:'ruler',t:'Design',d:'Your configuration locked and measured.',on:true},
+    {ic:'hammer',t:'Build',d:'Cut, joined and finished by one maker.',on:true},
+    {ic:'scissors',t:'Upholster',d:'Hand-cut fabric, tied and tufted.',on:false},
+    {ic:'truck',t:'Deliver',d:'White-glove delivery and placement.',on:false}
+  ];
+  const doneN=STEPS.filter(s=>s.on).length;
+  $('#track').insertAdjacentHTML('beforeend',STEPS.map((s,i)=>`<div class="step reveal" style="transition-delay:${i*90}ms"><span class="node ${s.on?'on':''}">${ico(s.ic)}</span><h3>${esc(s.t)}</h3><p>${esc(s.d)}</p></div>`).join(''));
+  onView($('#track'),()=>{$('#track .fillbar').style.width=`calc((100% + 22px) * ${doneN-1} / ${STEPS.length})`;});
+
+  // ---- reserve form ----
+  $('#reserveForm').addEventListener('submit',e=>{
+    e.preventDefault();const v=$('#reserveEmail').value.trim();const ok=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
+    $('#reserveNote').textContent=ok?`Reserved. We will hold your ${$('#buildName').textContent} build and email a timber sample.`:'Please enter a valid email address.';
+    $('#reserveNote').style.color=ok?'var(--accent-2)':'#e5736b'; if(ok)$('#reserveForm').reset();
+  });
+
+  // ---- hero: product visualizer cross-fading through finishes and room light ----
+  (()=>{const a=$('#hc0'),b=$('#hc1');if(!a)return;
+    const SEQ=[['walnut','camel','day'],['oak','forest','dusk'],['ebony','rust','night'],['teak','bone','day'],['walnut','slate','dusk'],['oak','camel','night']];
+    let i=0,front=a,back=b;
+    const set=(el,n)=>{const [timber,fabric,light]=SEQ[n];const S={timber,fabric,light};el.innerHTML=chairSVG(S,'h'+n);return S;};
+    const label=S=>`${TIMBER[S.timber].name} · ${FABRIC[S.fabric].name} · ${LIGHT[S.light].name}`;
+    $('#heroCap').textContent=label(set(a,0));a.style.opacity=1;b.style.opacity=0;
+    if(RM)return;
+    setInterval(()=>{if(document.hidden)return;i=(i+1)%SEQ.length;const S=set(back,i);back.style.opacity=1;front.style.opacity=0;[front,back]=[back,front];$('#heroCap').textContent=label(S);},2800);
+  })();
+
+  // ---- reveal + spy ----
+  if(RM||!('IntersectionObserver'in window))$$('.reveal').forEach(el=>el.classList.add('in'));
+  else{const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});$$('.reveal').forEach(el=>io.observe(el));}
+  const links=$$('.navlinks a'),secs=links.map(a=>$(a.getAttribute('href'))).filter(Boolean);
+  const spy=()=>{const y=scrollY+140;let cur=secs[0];secs.forEach(s=>{if(s&&s.offsetTop<=y)cur=s;});links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+(cur&&cur.id)));};
+  addEventListener('scroll',spy,{passive:true});spy();
+
+  // ---- hero isometric grid canvas ----
+  const cv=$('#grid'),cx=cv.getContext('2d');let W,H,raf,t=0;
+  const size=()=>{const r=Math.min(2,devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*r;cv.height=H*r;cx.setTransform(r,0,0,r,0,0);};
+  const draw=()=>{
+    cx.clearRect(0,0,W,H);
+    const iso=36;cx.lineWidth=1;
+    cx.strokeStyle='rgba(217,139,85,.18)';
+    // isometric lines drifting
+    const off=(t/2)%iso;
+    cx.beginPath();
+    for(let x=-H;x<W+H;x+=iso){cx.moveTo(x+off,0);cx.lineTo(x+off+H*0.58,H);}
+    for(let x=-H;x<W+H;x+=iso){cx.moveTo(x-off,0);cx.lineTo(x-off-H*0.58,H);}
+    cx.stroke();
+    // drifting node dots
+    for(let i=0;i<26;i++){
+      const px=(i*137.3+t*0.3)%W, py=(i*83.7+Math.sin(t/120+i)*14)%H;
+      cx.globalAlpha=0.25+0.2*Math.sin(t/90+i);cx.fillStyle='#eba878';
+      cx.beginPath();cx.arc(px,py,1.3,0,6.283);cx.fill();
+    }
+    cx.globalAlpha=1;
+    if(!RM&&!document.hidden){t+=0.5;raf=requestAnimationFrame(draw);}
+  };
+  size();draw();if(RM)draw();
+  addEventListener('resize',()=>{size();if(RM)draw();});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!RM){cancelAnimationFrame(raf);draw();}});
+})();
+</script>
+
+<script>
+(()=>{const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+ if(RM||!fine)return;
+ const h=document.querySelector('.hero');if(h){const m=document.createElement('div');m.className='masklayer';m.setAttribute('aria-hidden','true');h.insertBefore(m,h.querySelector('.wrap'));
+  h.addEventListener('pointermove',e=>{const r=h.getBoundingClientRect();m.style.setProperty('--mx',(e.clientX-r.left)+'px');m.style.setProperty('--my',(e.clientY-r.top)+'px');});}
+ document.querySelectorAll('.card,.coll,.piece,.proj').forEach(c=>{c.classList.add('tilt');
+  c.addEventListener('pointerenter',()=>{c.style.transitionDelay='0s';c.style.transition='transform .18s var(--ease),box-shadow .4s';});c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(900px) rotateX(${(-y*5).toFixed(2)}deg) rotateY(${(x*5).toFixed(2)}deg) translateY(-3px)`;});
+  c.addEventListener('pointerleave',()=>{c.style.transform='';});});
+})();
+</script>
+</body>
+</html>
